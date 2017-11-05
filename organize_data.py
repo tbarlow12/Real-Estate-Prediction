@@ -45,19 +45,20 @@ def get_feature_vector(data_dict,filename):
                 date_d = [m.groupdict() for m in date_p.finditer(key)]
                 year = int(date_d[0]['year'])
                 month = int(date_d[0]['month'])
-                value = float(instance[key])
-                size_rank = -1
-                try:
-                    size_rank = int(instance['SizeRank'])
-                    if size_rank > max_rank:
-                        max_rank = size_rank
-                    transformed.append([
-                        region_name,state,county,metro,city,size_rank,year,month,value
-                    ])
-                except ValueError:
-                    failed_parses.append([
-                        region_name,state,county,metro,city,size_rank,year,month,value
-                    ])
+                if len(instance[key].strip()) > 0:
+                    value = float(instance[key])
+                    size_rank = -1
+                    try:
+                        size_rank = int(instance['SizeRank'])
+                        if size_rank > max_rank:
+                            max_rank = size_rank
+                        transformed.append([
+                            region_name,state,county,metro,city,size_rank,year,month,value
+                        ])
+                    except ValueError:
+                        failed_parses.append([
+                            region_name,state,county,metro,city,size_rank,year,month,value
+                        ])
     if len(failed_parses) > 0:
         for instance in failed_parses:
             instance[8] = max_rank + 1
@@ -66,10 +67,11 @@ def get_feature_vector(data_dict,filename):
 
 def transform(data_dict,filename):
     feature_vector = get_feature_vector(data_dict,filename)
-    encode_categorical_features([0,1,2,3,4],feature_vector)
+    encode_categorical_features([1,2,3,4],feature_vector)
     return feature_vector
 
 def output_feature_vector(target_path,feature_vector):
+    print('Outputting ' + target_path)
     with open(target_path,mode='w') as f:
         writer = csv.writer(f)
         writer.writerow([
