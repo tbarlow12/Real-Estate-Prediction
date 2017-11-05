@@ -14,3 +14,7 @@ def get_immediate_subdirectories(a_dir):
 
 def get_files_in_dir(dir):
     return [f for f in listdir(dir) if isfile(join(dir, f))]
+
+def make_sure_dir_exists(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
