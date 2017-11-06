@@ -46,7 +46,10 @@ def get_feature_vector(data_dict,filename):
                 year = int(date_d[0]['year'])
                 month = int(date_d[0]['month'])
                 if len(instance[key].strip()) > 0:
-                    value = float(instance[key])
+                    try:
+                        value = float(instance[key])
+                    except ValueError:
+                        value = 0
                     size_rank = -1
                     try:
                         size_rank = int(instance['SizeRank'])
