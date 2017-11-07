@@ -18,3 +18,22 @@ def get_files_in_dir(dir):
 def make_sure_dir_exists(path):
     if not os.path.exists(path):
         os.makedirs(path)
+
+def get_dataset_from_csv(path):
+    with open(path) as csvfile:
+        reader = csv.reader(csvfile)
+        lines = list(reader)[1:]
+        x = []
+        y = []
+        for line in lines:
+            for i in range(0,len(line)-1):
+                line[i] = int(line[i])
+            x.append(line[0:-1])
+            y.append(float(line[-1]))
+        return x, y
+
+ 
+# Convert string column to float
+def str_column_to_float(dataset, column):
+	for row in dataset:
+		row[column] = float(row[column].strip())
