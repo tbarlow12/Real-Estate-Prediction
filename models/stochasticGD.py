@@ -1,8 +1,15 @@
 import pdb
 import numpy as np
 import helpers as h
+from copy import deepcopy
 
 class stochastic:
+
+    def predict_batch(self,data):
+        result = []
+        for item in data:
+            result.append(self.predict(item))
+        return result
 
     def predict(self,x):
         yhat = self.coef[0]
@@ -11,11 +18,13 @@ class stochastic:
         return yhat
     
     def fit(self,x,y):
-        h.normalize_dataset(x,y)
-        self.coef = [0.0 for i in range(len(x[0]))]
+        _x = deepcopy(x)
+        _y = deepcopy(y)
+        h.normalize_dataset(_x,_y)
+        self.coef = [0.0 for i in range(len(_x[0]))]
         for epoch in range(self.n_epoch):
             sum_error = 0
-            for features,label in zip(x,y):
+            for features,label in zip(_x,_y):
                 yhat = self.predict(features)
                 error = yhat - label
                 sum_error += error**2
