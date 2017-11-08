@@ -1,13 +1,16 @@
 import helpers as h 
-from models import neuralNet, polyReg, baselineClassifier
+import pdb
+import numpy as np
+from models import stochasticGD
+
+def computeCost(X, y, theta):  
+    inner = np.power(((X * theta.T) - y), 2)
+    return np.sum(inner) / (2 * len(X))
 
 x, y = h.get_dataset_from_csv('sample_data.csv')
 
-for i in range(0,len(x[0])):
+s = stochasticGD.stochastic(50,.001)
 
-    b = baselineClassifier.one_dimensional(i)
+print(s.fit(x,y))
 
-    b.fit(x,y)
-
-    print(i,b.predict(x[0]),y[0])
 

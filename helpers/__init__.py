@@ -37,3 +37,33 @@ def get_dataset_from_csv(path):
 def str_column_to_float(dataset, column):
 	for row in dataset:
 		row[column] = float(row[column].strip())
+
+def normalize_dataset(x,y):
+    mins_x = []
+    maxs_x = []
+    for i in range(0,len(x[0])):
+        data = [row[i] for row in x]
+        mins_x.append(find_min(data))
+        maxs_x.append(find_max(data))
+    min_y = find_min(y)
+    max_y = find_max(y)
+    for row in x:
+        for i in range(0,len(row)):
+            row[i] = (row[i] - mins_x[i]) / (maxs_x[i] - mins_x[i])
+    for i in range(0,len(y)):
+        y[i] = (y[i] - min_y) / (max_y - min_y)
+
+
+def find_max(data):
+    max = float("-inf")
+    for i in data:
+        if i > max:
+            max = i
+    return max
+
+def find_min(data):
+    min = float("inf")
+    for i in data:
+        if i < min:
+            min = i
+    return min
