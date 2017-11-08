@@ -8,6 +8,9 @@
     - E.g. Combine 1 bedroom, 2 bedroom, 3 bedroom, etc. files into one file with the number of bedrooms as a feature
 - Stochastic gradient descent
     - Run cross validation with different hyper params (learning rate and epochs) to see which gives us the best results 
+- Actually encode categorical data
+    - Currently being treated as continuous data... Need to apply "one hot encoding", having dummy features for each possible value
+    - Going to create MASSIVE files (horizontally at least)
 
 # Progress
 - 11/8/17

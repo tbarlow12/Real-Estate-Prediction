@@ -82,14 +82,41 @@ def output_feature_vector(target_path,feature_vector):
         ])
         writer.writerows(feature_vector)
 
+def output_aggregate(target_path,feature_vector):
+    print('Outputting ' + target_path)
+    with open(target_path,mode='w') as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            'RegionName','State','County','Metro','City','SizeRank','Year','Month','Bedrooms','Value'
+        ])
+        writer.writerows(feature_vector)
+
+
 def output_transformed_data(root_dir):
+    bedroom_p = re.compile('(?P<name>.*)_(?P<bedrooms>[0-9]+)bedroom',re.I)
     for dir in h.get_immediate_subdirectories(root_dir):
         data_dict = get_data_dict(root_dir,dir)
         target_dir = root_dir + '/' + dir + '/transformed/'
         h.make_sure_dir_exists(target_dir)
+        aggregates = {}
         for filename in data_dict:
             feature_vector = transform(data_dict,filename)
             output_feature_vector(target_dir + filename + '.csv' ,feature_vector)
+            if bedroom_p.match(filename):
+                bedroom_d = [m.groupdict() for m in bedroom_p.finditer(filename)][0]
+                name = bedroom_d['name']
+                bedrooms = int(bedroom_d['bedrooms'])
+                for row in feature_vector:
+                    row.insert(-1,bedrooms)
+                if name in aggregates:
+                    aggregates[name].extend(feature_vector)
+                else:
+                    aggregates[name] = feature_vector
+        for name in aggregates:
+            aggregate_dir = target_dir + 'aggregate/'
+            h.make_sure_dir_exists(aggregate_dir)
+            output_aggregate(aggregate_dir + name + '.csv',feature_vector)
+        
 
 def main():
     output_transformed_data('data/zillow')
