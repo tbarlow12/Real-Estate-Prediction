@@ -158,6 +158,11 @@ Outputting data/zillow/city/transformed/City_Zri_MultiFamilyResidenceRental.csv
 Outputting data/zillow/city/transformed/City_Zri_MultiFamilyResidenceRental_Summary.csv
 Outputting data/zillow/city/transformed/City_Zri_SingleFamilyResidenceRental.csv
 Outputting data/zillow/city/transformed/City_Zri_SingleFamilyResidenceRental_Summary.csv
+Outputting data/zillow/city/transformed/aggregate/City_MedianListingPricePerSqft.csv
+Outputting data/zillow/city/transformed/aggregate/City_MedianListingPrice.csv
+Outputting data/zillow/city/transformed/aggregate/City_MedianRentalPricePerSqft.csv
+Outputting data/zillow/city/transformed/aggregate/City_MedianRentalPrice.csv
+Outputting data/zillow/city/transformed/aggregate/City_Zhvi.csv
 County_Listings_PriceCut_SeasAdj_AllHomes.csv
 County_Listings_PriceCut_SeasAdj_Condominum.csv
 County_Listings_PriceCut_SeasAdj_SingleFamilyResidence.csv
@@ -318,6 +323,11 @@ Outputting data/zillow/county/transformed/County_Zri_MultiFamilyResidenceRental.
 Outputting data/zillow/county/transformed/County_Zri_MultiFamilyResidenceRental_Summary.csv
 Outputting data/zillow/county/transformed/County_Zri_SingleFamilyResidenceRental.csv
 Outputting data/zillow/county/transformed/County_Zri_SingleFamilyResidenceRental_Summary.csv
+Outputting data/zillow/county/transformed/aggregate/County_MedianListingPricePerSqft.csv
+Outputting data/zillow/county/transformed/aggregate/County_MedianListingPrice.csv
+Outputting data/zillow/county/transformed/aggregate/County_MedianRentalPricePerSqft.csv
+Outputting data/zillow/county/transformed/aggregate/County_MedianRentalPrice.csv
+Outputting data/zillow/county/transformed/aggregate/County_Zhvi.csv
 Metro_Listings_PriceCut_SeasAdj_AllHomes.csv
 Metro_Listings_PriceCut_SeasAdj_BottomTier.csv
 Metro_Listings_PriceCut_SeasAdj_Condominum.csv
@@ -490,6 +500,11 @@ Outputting data/zillow/metro/transformed/Metro_Zri_MultiFamilyResidenceRental.cs
 Outputting data/zillow/metro/transformed/Metro_Zri_MultiFamilyResidenceRental_Summary.csv
 Outputting data/zillow/metro/transformed/Metro_Zri_SingleFamilyResidenceRental.csv
 Outputting data/zillow/metro/transformed/Metro_Zri_SingleFamilyResidenceRental_Summary.csv
+Outputting data/zillow/metro/transformed/aggregate/Metro_MedianListingPricePerSqft.csv
+Outputting data/zillow/metro/transformed/aggregate/Metro_MedianListingPrice.csv
+Outputting data/zillow/metro/transformed/aggregate/Metro_MedianRentalPricePerSqft.csv
+Outputting data/zillow/metro/transformed/aggregate/Metro_MedianRentalPrice.csv
+Outputting data/zillow/metro/transformed/aggregate/Metro_Zhvi.csv
 Neighborhood_Listings_PriceCut_SeasAdj_AllHomes.csv
 Neighborhood_Listings_PriceCut_SeasAdj_Condominum.csv
 Neighborhood_Listings_PriceCut_SeasAdj_SingleFamilyResidence.csv
@@ -650,6 +665,11 @@ Outputting data/zillow/neighborhood/transformed/Neighborhood_Zri_MultiFamilyResi
 Outputting data/zillow/neighborhood/transformed/Neighborhood_Zri_MultiFamilyResidenceRental_Summary.csv
 Outputting data/zillow/neighborhood/transformed/Neighborhood_Zri_SingleFamilyResidenceRental.csv
 Outputting data/zillow/neighborhood/transformed/Neighborhood_Zri_SingleFamilyResidenceRental_Summary.csv
+Outputting data/zillow/neighborhood/transformed/aggregate/Neighborhood_MedianListingPricePerSqft.csv
+Outputting data/zillow/neighborhood/transformed/aggregate/Neighborhood_MedianListingPrice.csv
+Outputting data/zillow/neighborhood/transformed/aggregate/Neighborhood_MedianRentalPricePerSqft.csv
+Outputting data/zillow/neighborhood/transformed/aggregate/Neighborhood_Zhvi.csv
+Outputting data/zillow/neighborhood/transformed/aggregate/Neighborhood_MedianRentalPrice.csv
 State_Listings_PriceCut_SeasAdj_AllHomes.csv
 State_Listings_PriceCut_SeasAdj_Condominum.csv
 State_Listings_PriceCut_SeasAdj_SingleFamilyResidence.csv
@@ -810,6 +830,11 @@ Outputting data/zillow/state/transformed/State_Zri_MultiFamilyResidenceRental.cs
 Outputting data/zillow/state/transformed/State_Zri_MultiFamilyResidenceRental_Summary.csv
 Outputting data/zillow/state/transformed/State_Zri_SingleFamilyResidenceRental.csv
 Outputting data/zillow/state/transformed/State_Zri_SingleFamilyResidenceRental_Summary.csv
+Outputting data/zillow/state/transformed/aggregate/State_MedianListingPricePerSqft.csv
+Outputting data/zillow/state/transformed/aggregate/State_MedianListingPrice.csv
+Outputting data/zillow/state/transformed/aggregate/State_MedianRentalPricePerSqft.csv
+Outputting data/zillow/state/transformed/aggregate/State_MedianRentalPrice.csv
+Outputting data/zillow/state/transformed/aggregate/State_Zhvi.csv
 Zip_Listings_PriceCut_SeasAdj_AllHomes.csv
 Zip_Listings_PriceCut_SeasAdj_Condominum.csv
 Zip_Listings_PriceCut_SeasAdj_SingleFamilyResidence.csv
@@ -970,3 +995,8 @@ Outputting data/zillow/zip/transformed/Zip_Zri_MultiFamilyResidenceRental.csv
 Outputting data/zillow/zip/transformed/Zip_Zri_MultiFamilyResidenceRental_Summary.csv
 Outputting data/zillow/zip/transformed/Zip_Zri_SingleFamilyResidenceRental.csv
 Outputting data/zillow/zip/transformed/Zip_Zri_SingleFamilyResidenceRental_Summary.csv
+Outputting data/zillow/zip/transformed/aggregate/Zip_MedianListingPricePerSqft.csv
+Outputting data/zillow/zip/transformed/aggregate/Zip_MedianListingPrice.csv
+Outputting data/zillow/zip/transformed/aggregate/Zip_MedianRentalPricePerSqft.csv
+Outputting data/zillow/zip/transformed/aggregate/Zip_MedianRentalPrice.csv
+Outputting data/zillow/zip/transformed/aggregate/Zip_Zhvi.csv

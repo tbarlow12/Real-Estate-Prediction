@@ -18,8 +18,22 @@ def get_data_dict(root_dir,dir):
             data_dict[name] = h.csv_to_list_of_dicts(path + '/' + f)
     return data_dict
 
+def hash_value(item,size):
+    final_hash = [0] * size
+    for char in item:
+        final_hash[hash(char) % size] += 1
+    return final_hash
+
 def encode_categorical_features(feature_indices,feature_vector):
+    pass
+
     for index in feature_indices:
+        distict_values = set([item[index] for item in feature_vector])
+        hash_d = {}
+        for item in distict_values:
+            hash_d[item] = hash_value(item,10)
+            pdb.set_trace()
+    '''for index in feature_indices:
         distict_values = set([item[index] for item in feature_vector])
         value_d = {}
         value = 1
@@ -30,7 +44,7 @@ def encode_categorical_features(feature_indices,feature_vector):
             h = hash(instance[index])
             pdb.set_trace()
             instance[index] = value_d[instance[index]]
-        #TODO: Hash it so you can do the same thing in the prediction models
+        #TODO: Hash it so you can do the same thing in the prediction models'''
 
 def get_feature_vector(data_dict,filename):
     transformed = []
