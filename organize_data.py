@@ -28,8 +28,7 @@ def encode_categorical_features(feature_indices,feature_vector):
             value += 1
         for instance in feature_vector:
             instance[index] = value_d[instance[index]]
-        #TODO: Encode number assigned to each value to binary, using as many columns as you need
-        #TODO: Is this the right way? Should I just use a hash out of the box?
+        #TODO: Hash it so you can do the same thing in the prediction models
 
 def get_feature_vector(data_dict,filename):
     transformed = []
