@@ -6,6 +6,8 @@ from os.path import isfile, join
 import helpers as h
 import re
 
+categorical_encoding_size = 50
+
 def get_data_dict(root_dir,dir):
     data_dict = {}
     path = root_dir + '/' + dir
@@ -24,30 +26,17 @@ def hash_value(item,size):
         final_hash[hash(char) % size] += 1
     return final_hash
 
-def encode_categorical_features(feature_indices,feature_vector):
-    pass
 
+def encode_categorical_features(feature_indices,feature_vector):
     for index in feature_indices:
-        distict_values = set([item[index] for item in feature_vector])
+        index = index * categorical_encoding_size
+        distinct_values = set([item[index] for item in feature_vector])
         hash_d = {}
-        for item in distict_values:
-            hash_d[item] = hash_value(item,10)
-        for instance in feature_vector:
-            pdb.set_trace()
-            instance = instance[0:index] + hash_d[instance[index]] + instance[index + 1:]
-            pdb.set_trace()
-    '''for index in feature_indices:
-        distict_values = set([item[index] for item in feature_vector])
-        value_d = {}
-        value = 1
-        for item in distict_values:
-            value_d[item] = value
-            value += 1
-        for instance in feature_vector:
-            h = hash(instance[index])
-            pdb.set_trace()
-            instance[index] = value_d[instance[index]]
-        #TODO: Hash it so you can do the same thing in the prediction models'''
+        for item in distinct_values:
+            hash_d[item] = hash_value(item,categorical_encoding_size)
+        for i in range(0,len(feature_vector)):
+            instance = feature_vector[i]
+            feature_vector[i] = instance[0:index] + hash_d[instance[index]] + instance[index + 1:]
 
 def get_feature_vector(data_dict,filename):
     transformed = []
@@ -90,7 +79,7 @@ def get_feature_vector(data_dict,filename):
 
 def transform(data_dict,filename):
     feature_vector = get_feature_vector(data_dict,filename)
-    encode_categorical_features([0,1,2,3,4],feature_vector)
+    
     return feature_vector
 
 def output_feature_vector(target_path,feature_vector):
@@ -100,6 +89,19 @@ def output_feature_vector(target_path,feature_vector):
         writer.writerow([
             'RegionName','State','County','Metro','City','SizeRank','Year','Month','Value'
         ])
+        writer.writerows(feature_vector)
+
+def output_encoded_vector(target_path,feature_vector):
+    print('Outputting ' + target_path)
+    with open(target_path,mode='w') as f:
+        writer = csv.writer(f)
+        categorical_headers = ['RegionName','State','County','Metro','City']
+        headers = []
+        for c in categorical_headers:
+            for i in range(categorical_encoding_size):
+                headers.append('{}-{}'.format(c,i+1))
+        headers.extend(['SizeRank','Year','Month','Value'])
+        writer.writerow(headers)
         writer.writerows(feature_vector)
 
 def output_aggregate(target_path,feature_vector):
@@ -113,7 +115,7 @@ def output_aggregate(target_path,feature_vector):
 
 
 def output_transformed_data(root_dir):
-    bedroom_p = re.compile('(?P<name>.*)_(?P<bedrooms>[0-9]+)bedroom',re.I)
+    '''bedroom_p = re.compile('(?P<name>.*)_(?P<bedrooms>[0-9]+)bedroom',re.I)'''
     for dir in h.get_immediate_subdirectories(root_dir):
         data_dict = get_data_dict(root_dir,dir)
         target_dir = root_dir + '/' + dir + '/transformed/'
@@ -121,8 +123,14 @@ def output_transformed_data(root_dir):
         aggregates = {}
         for filename in data_dict:
             feature_vector = transform(data_dict,filename)
+            
             output_feature_vector(target_dir + filename + '.csv' ,feature_vector)
-            if bedroom_p.match(filename):
+            encode_categorical_features([0,1,2,3,4],feature_vector)
+            encoded_dir = target_dir + 'encoded/'
+            h.make_sure_dir_exists(encoded_dir)
+            output_encoded_vector(encoded_dir + filename + '.csv',feature_vector)
+            
+            '''if bedroom_p.match(filename):
                 bedroom_d = [m.groupdict() for m in bedroom_p.finditer(filename)][0]
                 name = bedroom_d['name']
                 bedrooms = int(bedroom_d['bedrooms'])
@@ -135,7 +143,7 @@ def output_transformed_data(root_dir):
         for name in aggregates:
             aggregate_dir = target_dir + 'aggregate/'
             h.make_sure_dir_exists(aggregate_dir)
-            output_aggregate(aggregate_dir + name + '.csv',feature_vector)
+            output_aggregate(aggregate_dir + name + '.csv',feature_vector)'''
         
 
 def main():
