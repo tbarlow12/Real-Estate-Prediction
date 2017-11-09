@@ -32,6 +32,9 @@ def encode_categorical_features(feature_indices,feature_vector):
         hash_d = {}
         for item in distict_values:
             hash_d[item] = hash_value(item,10)
+        for instance in feature_vector:
+            pdb.set_trace()
+            instance = instance[0:index] + hash_d[instance[index]] + instance[index + 1:]
             pdb.set_trace()
     '''for index in feature_indices:
         distict_values = set([item[index] for item in feature_vector])
@@ -87,7 +90,7 @@ def get_feature_vector(data_dict,filename):
 
 def transform(data_dict,filename):
     feature_vector = get_feature_vector(data_dict,filename)
-    encode_categorical_features([1,2,3,4],feature_vector)
+    encode_categorical_features([0,1,2,3,4],feature_vector)
     return feature_vector
 
 def output_feature_vector(target_path,feature_vector):
