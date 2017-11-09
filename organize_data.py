@@ -27,6 +27,8 @@ def encode_categorical_features(feature_indices,feature_vector):
             value_d[item] = value
             value += 1
         for instance in feature_vector:
+            h = hash(instance[index])
+            pdb.set_trace()
             instance[index] = value_d[instance[index]]
         #TODO: Hash it so you can do the same thing in the prediction models
 

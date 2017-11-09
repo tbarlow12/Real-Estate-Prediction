@@ -11,6 +11,18 @@
 - Actually encode categorical data
     - Currently being treated as continuous data... Need to apply "one hot encoding", having dummy features for each possible value
     - Going to create MASSIVE files (horizontally at least)
+    - DON'T do this... Go for feature hashing
+- Improve model evaluation
+    - Compute R-squared value
+    - Plot points
+- How to decide which feature are most important?
+- Choose one variable and use the others as features
+    - PCA or SVD to determine features
+- Add other economic measures
+    - Daily closings of dow
+    - GDP
+    - During recession??
+- Maybe not predict specific price, but *predict specific rank*
 
 # Progress
 - 11/8/17

@@ -67,3 +67,15 @@ def find_min(data):
         if i < min:
             min = i
     return min
+
+def hash_zip(zip):
+    pass
+
+def hash_city(city):
+    pass
+
+def hash_state(state):
+    pass
+
+def hash_metro(metro):
+    pass
