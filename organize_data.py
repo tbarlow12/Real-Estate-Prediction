@@ -45,10 +45,10 @@ def get_feature_vector(data_dict,filename):
     max_rank = 0
     for instance in data_dict[filename]:
         region_name = instance['RegionName']
-        state = instance['State'] if 'State' in instance else region_name
-        county = instance['County'] if 'County' in instance else region_name
-        metro = instance['Metro'] if 'Metro' in instance else region_name
-        city = instance['City'] if 'City' in instance else region_name
+        state = instance['State'] if 'State' in instance else ''
+        county = instance['County'] if 'County' in instance else ''
+        metro = instance['Metro'] if 'Metro' in instance else ''
+        city = instance['City'] if 'City' in instance else ''
         for key in instance:
             if date_p.match(key):
                 date_d = [m.groupdict() for m in date_p.finditer(key)]
@@ -113,6 +113,30 @@ def output_encoded_vector(target_path,feature_vector):
             e = encoded_row(row)
             writer.writerow(e)
 
+def output_aggregate(aggregate,metrics,target_dir):
+    
+    for region in aggregate:
+        with open(target_dir + '{}.csv'.format(region),mode='w') as f:
+            writer = csv.writer(f)
+            headers = ['Region','Year','Month','MonthId'] + metrics
+            writer.writerow(headers)
+            
+            region_d = aggregate[region]
+            for year in region_d:
+                year_d = region_d[year]
+                for month in year_d:
+                    month_d = year_d[month]
+                    metric_values = []
+                    for metric in metrics:
+                        if metric in month_d:
+                            metric_values.append(month_d[metric])
+                        else:
+                            metric_values.append('')
+                    writer.writerow([region,year,month,year * 12 + month] + metric_values)
+
+
+
+
 def add_to_aggregate(aggregate,feature_vector,metric):
 
     year = feature_vector[6]
@@ -121,49 +145,58 @@ def add_to_aggregate(aggregate,feature_vector,metric):
 
     aggregate_name = ''
     for item in feature_vector[0:5]:
-        aggregate_name += '{}&'.format(item)
+        aggregate_name += '{}-'.format(item)
+    aggregate_name = aggregate_name.strip()[0:-1]
+    aggregate_name = aggregate_name.replace('/',' ')
+    if '/' in aggregate_name:
+        pdb.set_trace()
     if aggregate_name in aggregate:
-        if metric in aggregate[aggregate_name]:
-            if year in aggregate[aggregate_name][metric]:
-                aggregate[aggregate_name][metric][year][month] = value
+        if year in aggregate[aggregate_name]:
+            if month in aggregate[aggregate_name][year]:
+                aggregate[aggregate_name][year][month][metric] = value
             else:
-                aggregate[aggregate_name][metric][year] = {
-                    month : value
+                aggregate[aggregate_name][year][month] = {
+                    metric : value
                 }
         else:
-            aggregate[aggregate_name][metric] = {
-                year : {
-                    month : value
+            aggregate[aggregate_name][year] = {
+                month : {
+                    metric : value
                 }
             }
     else:
         aggregate[aggregate_name] = {
-            metric : {
-                year : {
-                    month : value
+            year : {
+                month : {
+                    metric : value
                 }
             }
         }
 
 def output_transformed_data(root_dir):
-    '''bedroom_p = re.compile('(?P<name>.*)_(?P<bedrooms>[0-9]+)bedroom',re.I)'''
     for dir in h.get_immediate_subdirectories(root_dir):
         data_dict = get_data_dict(root_dir,dir)
         target_dir = root_dir + '/' + dir + '/transformed/'
         h.make_sure_dir_exists(target_dir)
         aggregate = {}
+        metrics = []
         for filename in data_dict:
+            print('Aggregating: {}'.format(filename))
             feature_vector = transform(data_dict,filename)
             for vector in feature_vector:
-                add_to_aggregate(aggregate,vector,filename)            
-                pdb.set_trace()
+                add_to_aggregate(aggregate,vector,filename)  
+            metrics.append(filename)
+        sorted(metrics)
+        output_aggregate(aggregate,metrics,target_dir)  
+        '''        
             output_feature_vector(target_dir + filename + '.csv' ,feature_vector)
             encode_categorical_features([0,1,2,3,4],feature_vector)
             encoded_dir = target_dir + 'encoded/'
             h.make_sure_dir_exists(encoded_dir)
             output_encoded_vector(encoded_dir + filename + '.csv',feature_vector)
-            
-            '''if bedroom_p.match(filename):
+            '''
+
+        '''    if bedroom_p.match(filename):
                 bedroom_d = [m.groupdict() for m in bedroom_p.finditer(filename)][0]
                 name = bedroom_d['name']
                 bedrooms = int(bedroom_d['bedrooms'])
