@@ -32,6 +32,29 @@ def get_dataset_from_csv(path):
             y.append(float(line[-1]))
         return x, y
 
+def load_encoded(path):
+     with open(path) as csvfile:
+        reader = csv.reader(csvfile)
+        lines = list(reader)
+        dims = int(lines[0][0])
+        instances = lines[2:]
+        rows = []
+        for instance in instances:
+            row = [0] * dims
+            for item in instance:
+                split = item.split(' ')
+                index = int(split[0])
+                row[index] = float(split[1])
+            rows.append(row)
+            '''
+            try:
+                row[index] = float(split[1])
+            except TypeError:
+                pdb.set_trace()
+            '''
+        return [row[0:-1] for row in rows],[row[-1] for row in rows]
+                
+
  
 # Convert string column to float
 def str_column_to_float(dataset, column):
@@ -49,7 +72,13 @@ def normalize_dataset(x,y):
     max_y = find_max(y)
     for row in x:
         for i in range(0,len(row)):
-            row[i] = (row[i] - mins_x[i]) / (maxs_x[i] - mins_x[i])
+            if maxs_x[i] == mins_x[i]:
+                if maxs_x[i] == 0:
+                    row[i] == 0
+                else:
+                    row[i] = 1
+            else:
+                row[i] = (row[i] - mins_x[i]) / (maxs_x[i] - mins_x[i])
     for i in range(0,len(y)):
         y[i] = (y[i] - min_y) / (max_y - min_y)
 
@@ -68,14 +97,3 @@ def find_min(data):
             min = i
     return min
 
-def hash_zip(zip):
-    pass
-
-def hash_city(city):
-    pass
-
-def hash_state(state):
-    pass
-
-def hash_metro(metro):
-    pass

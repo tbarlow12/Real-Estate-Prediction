@@ -6,7 +6,7 @@ from os.path import isfile, join
 import helpers as h
 import re
 
-categorical_encoding_size = 50
+categorical_encoding_size = 10
 
 def get_data_dict(root_dir,dir):
     data_dict = {}
@@ -91,6 +91,13 @@ def output_feature_vector(target_path,feature_vector):
         ])
         writer.writerows(feature_vector)
 
+def encoded_row(row):
+    result = []
+    for i in range(0,len(row)):
+        if row[i] != 0 and row[i] != '0':
+            result.append('{} {}'.format(i,row[i]))
+    return result
+
 def output_encoded_vector(target_path,feature_vector):
     print('Outputting ' + target_path)
     with open(target_path,mode='w') as f:
@@ -98,11 +105,13 @@ def output_encoded_vector(target_path,feature_vector):
         categorical_headers = ['RegionName','State','County','Metro','City']
         headers = []
         for c in categorical_headers:
-            for i in range(categorical_encoding_size):
-                headers.append('{}-{}'.format(c,i+1))
+            headers.append('{} {}'.format(c,categorical_encoding_size))                
         headers.extend(['SizeRank','Year','Month','Value'])
+        writer.writerow([len(feature_vector[0])])
         writer.writerow(headers)
-        writer.writerows(feature_vector)
+        for row in feature_vector:
+            e = encoded_row(row)
+            writer.writerow(e)
 
 def output_aggregate(target_path,feature_vector):
     print('Outputting ' + target_path)

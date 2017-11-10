@@ -5,17 +5,19 @@ from copy import deepcopy
 
 class stochastic:
 
-    def predict_batch(self,data):
-        result = []
-        for item in data:
-            result.append(self.predict(item))
-        return result
 
     def predict(self,x):
-        yhat = self.coef[0]
-        for i in range(len(x)-1):
-            yhat += self.coef[i + 1] * x[i]
-        return yhat
+        if isinstance(x,list) and isinstance(x[0],list):
+            result = []
+            for item in x:
+                result.append(self.predict(item))
+            return result
+        else:
+            yhat = self.coef[0]
+
+            for i in range(len(x)-1):
+                yhat += self.coef[i + 1] * x[i]
+            return yhat
     
     def fit(self,x,y):
         _x = deepcopy(x)
@@ -31,7 +33,7 @@ class stochastic:
                 self.coef[0] = self.coef[0] - self.l_rate * error
                 for i in range(len(features)-1):
                     self.coef[i + 1] = self.coef[i + 1] - self.l_rate * error * features[i]
-            print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, self.l_rate, sum_error))
+            #print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, self.l_rate, sum_error))
         return self.coef
 
     def __init__(self,n_epoch,l_rate):

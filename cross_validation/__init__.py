@@ -23,12 +23,12 @@ def rmse_metric(predicted, actual):
     for i in range(len(actual)):
         prediction_error = predicted[i] - actual[i]
         sum_error += (prediction_error ** 2)
-        print('Predicted: {}, Actual: {}'.format(predicted[i],actual[i]))
+        #print('Predicted: {}, Actual: {}'.format(predicted[i],actual[i]))
     mean_error = sum_error / float(len(actual))
     return math.sqrt(mean_error)
 
 def evaluate_model(model,x,y):
-    results = model.predict_batch(x)
+    results = model.predict(x)
     return rmse_metric(results,y)
     
 
