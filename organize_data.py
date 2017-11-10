@@ -73,7 +73,7 @@ def get_feature_vector(data_dict,filename):
                         ])
     if len(failed_parses) > 0:
         for instance in failed_parses:
-            instance[8] = max_rank + 1
+            instance[5] = max_rank + 1
         transformed.extend(failed_parses)
     return transformed
 
@@ -113,15 +113,37 @@ def output_encoded_vector(target_path,feature_vector):
             e = encoded_row(row)
             writer.writerow(e)
 
-def output_aggregate(target_path,feature_vector):
-    print('Outputting ' + target_path)
-    with open(target_path,mode='w') as f:
-        writer = csv.writer(f)
-        writer.writerow([
-            'RegionName','State','County','Metro','City','SizeRank','Year','Month','Bedrooms','Value'
-        ])
-        writer.writerows(feature_vector)
+def add_to_aggregate(aggregate,feature_vector,metric):
 
+    year = feature_vector[6]
+    month = feature_vector[7]
+    value = feature_vector[8]
+
+    aggregate_name = ''
+    for item in feature_vector[0:5]:
+        aggregate_name += '{}&'.format(item)
+    if aggregate_name in aggregate:
+        if metric in aggregate[aggregate_name]:
+            if year in aggregate[aggregate_name][metric]:
+                aggregate[aggregate_name][metric][year][month] = value
+            else:
+                aggregate[aggregate_name][metric][year] = {
+                    month : value
+                }
+        else:
+            aggregate[aggregate_name][metric] = {
+                year : {
+                    month : value
+                }
+            }
+    else:
+        aggregate[aggregate_name] = {
+            metric : {
+                year : {
+                    month : value
+                }
+            }
+        }
 
 def output_transformed_data(root_dir):
     '''bedroom_p = re.compile('(?P<name>.*)_(?P<bedrooms>[0-9]+)bedroom',re.I)'''
@@ -129,10 +151,12 @@ def output_transformed_data(root_dir):
         data_dict = get_data_dict(root_dir,dir)
         target_dir = root_dir + '/' + dir + '/transformed/'
         h.make_sure_dir_exists(target_dir)
-        aggregates = {}
+        aggregate = {}
         for filename in data_dict:
             feature_vector = transform(data_dict,filename)
-            
+            for vector in feature_vector:
+                add_to_aggregate(aggregate,vector,filename)            
+                pdb.set_trace()
             output_feature_vector(target_dir + filename + '.csv' ,feature_vector)
             encode_categorical_features([0,1,2,3,4],feature_vector)
             encoded_dir = target_dir + 'encoded/'
