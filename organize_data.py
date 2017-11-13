@@ -144,9 +144,8 @@ def add_to_aggregate(aggregate,feature_vector,metric):
     value = feature_vector[8]
 
     aggregate_name = ''
-    for item in feature_vector[0:5]:
-        aggregate_name += '{}-'.format(item)
-    aggregate_name = aggregate_name.strip()[0:-1]
+    #'RegionName','State','County','Metro','City','SizeRank','Year','Month','Value'
+    aggregate_name += '{}-{}'.format(feature_vector[0],feature_vector[1])
     aggregate_name = aggregate_name.replace('/',' ')
     if '/' in aggregate_name:
         pdb.set_trace()
