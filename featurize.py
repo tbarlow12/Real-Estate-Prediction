@@ -1,4 +1,4 @@
-# Converts the csv file into a feature set
+# Converts the csv file into a feature set while combining the year and month
 
 import csv
 
