@@ -3,7 +3,7 @@
 import csv
 
 
-def trungle():
+def featurize():
 	with open("Sample Data/84070-UT.csv", "rb") as source, open("result", "wb") as result:
 		rdr = csv.reader(source)
 		wtr = csv.writer(result)
