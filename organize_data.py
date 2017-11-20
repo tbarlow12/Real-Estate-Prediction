@@ -118,7 +118,7 @@ def output_aggregate(aggregate,metrics,target_dir):
     for region in aggregate:
         with open(target_dir + '{}.csv'.format(region),mode='w') as f:
             writer = csv.writer(f)
-            headers = ['Region','Year','Month','MonthId'] + metrics
+            headers = ['Region','Year','Month','MonthId','IsDuringRecession'] + metrics
             writer.writerow(headers)
             
             region_d = aggregate[region]
@@ -132,7 +132,14 @@ def output_aggregate(aggregate,metrics,target_dir):
                             metric_values.append(month_d[metric])
                         else:
                             metric_values.append('')
-                    writer.writerow([region,year,month,year * 12 + month] + metric_values)
+                    monthId = year * 12 + month
+                    writer.writerow([
+                        region,
+                        year,
+                        month,
+                        monthId,
+                        1 if monthId >= (2007 * 12 + 12) and monthId <= (2009 * 12 + 6) else 0
+                    ] + metric_values)
 
 
 
