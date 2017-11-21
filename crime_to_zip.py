@@ -4,6 +4,7 @@ import geopy
 from geopy.geocoders import Nominatim
 from datetime import datetime
 from dateutil import parser
+import re
 
 geolocator = Nominatim()
 
@@ -27,15 +28,24 @@ def get_col_value(row,name):
         val = raw
     return '{}={}'.format(name,val)
 
+zip_p = re.compile('(9[0-9][0-9][0-9][0-9])')
+
 with open('data/Crime_Data_from_2010_to_Present.csv') as f:
-    reader = csv.DictReader(f)
+    reader = list(csv.DictReader(f))
+    num_lines = len(reader)
+    i = 0
     for row in reader:
         if 'Location ' in row:
             location_s = row['Location '].split(', ')
             lat = location_s[0][1:]
             lon = location_s[1][0:-1]
-            geolocation = geolocator.reverse("{}, {}".format(lat,lon))
-            zip_code = geolocation.raw['address']['postcode']
+            try:
+                geolocation = geolocator.reverse("{}, {}".format(lat,lon))
+                zip_code = geolocation.raw['address']['postcode']
+                zip_code = zip_p.search(zip_code).group(1)
+            except AttributeError:
+                print('Got an error: {}'.format(row))
+                continue
             
             dt = parser.parse(row['Date Occurred'])
 
@@ -54,25 +64,26 @@ with open('data/Crime_Data_from_2010_to_Present.csv') as f:
             
             if zip_code in zip_code_data:
                 if monthId in zip_code_data[zip_code]:
-                    increment_or_create(zip_code_data[zip_code][monthId]['crime_codes'],crime_code)
-                    increment_or_create(zip_code_data[zip_code][monthId]['victim_ages'],victim_age)
-                    increment_or_create(zip_code_data[zip_code][monthId]['victim_sexes'],victim_sex)
-                    increment_or_create(zip_code_data[zip_code][monthId]['victim_descents'],victim_descent)
+                    try:
+                        increment_or_create(zip_code_data[zip_code][monthId]['crime_codes'],crime_code)
+                        increment_or_create(zip_code_data[zip_code][monthId]['victim_ages'],victim_age)
+                        increment_or_create(zip_code_data[zip_code][monthId]['victim_sexes'],victim_sex)
+                        increment_or_create(zip_code_data[zip_code][monthId]['victim_descents'],victim_descent)
+                    except KeyError:
+                        pdb.set_trace()
                 else:
                     zip_code_data[zip_code][monthId] = {
-                        monthId : {
-                            'crime_codes' : {
-                                crime_code : 1
-                            },
-                            'victim_ages' : {
-                                victim_age : 1
-                            },
-                            'victim_sexes' : {
-                                victim_sex : 1
-                            },
-                            'victim_descents' : {
-                                victim_descent : 1
-                            }
+                        'crime_codes' : {
+                            crime_code : 1
+                        },
+                        'victim_ages' : {
+                            victim_age : 1
+                        },
+                        'victim_sexes' : {
+                            victim_sex : 1
+                        },
+                        'victim_descents' : {
+                            victim_descent : 1
                         }
                     }
             else:
@@ -92,6 +103,8 @@ with open('data/Crime_Data_from_2010_to_Present.csv') as f:
                         }
                     }
                 }
+            i += 1
+            print('{} out of {}'.format(i,num_lines))
 
 
 def add_data(row,data_dict,data_list,name):
