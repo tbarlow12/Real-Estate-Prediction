@@ -89,15 +89,15 @@ def add_data(row, data_dict, data_list, name):
 with open('Sample Data/crime_data_total.csv', 'w') as f:
     writer = csv.writer(f)
 
-    tc = list('total')
+    tc = ['total']
 
-    headers = ['Zip Code', 'MonthId']
+    headers = ['Zip Code', 'MonthId'] + tc
     rows = [headers]
 
     for zip_code in zip_code_data:
         for monthId in zip_code_data[zip_code]:
             row = [zip_code, monthId]
             data_dict = zip_code_data[zip_code][monthId]
-            add_data(row, data_dict, tc, 'total')
+            add_data(row, data_dict, tc, 'total_crime')
             rows.append(row)
     writer.writerows(rows)
