@@ -43,7 +43,7 @@ with open('data/Crime_Data_from_2010_to_Present.csv') as f:
                 geolocation = geolocator.reverse("{}, {}".format(lat, lon))
                 zip_code = geolocation.raw['address']['postcode']
                 zip_code = zip_p.search(zip_code).group(1)
-            except AttributeError:
+            except:
                 print('Got an error: {}'.format(row))
                 continue
 
@@ -74,10 +74,8 @@ with open('data/Crime_Data_from_2010_to_Present.csv') as f:
             i += 1
             print('{} out of {}'.format(i, num_lines))
 
-        if i==100:
+        if i>100:
             break
-
-        i += 1
 
 
 def add_data(row, data_dict, data_list, name):
