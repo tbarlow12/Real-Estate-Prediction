@@ -23,7 +23,7 @@ def featurize():
 			example = []
 			for c in r:
 				if headers[index] == 'Year':
-					year = int(c) - 1990 # Base Year
+					year = int(c)
 					year = year * 12
 					month = int(r[index + 1])
 
