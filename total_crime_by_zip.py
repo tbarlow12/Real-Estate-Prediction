@@ -74,7 +74,7 @@ with open('data/Crime_Data_from_2010_to_Present.csv') as f:
             i += 1
             print('{} out of {}'.format(i, num_lines))
 
-        if i>100:
+        if i>1000:
             break
 
 
@@ -98,6 +98,6 @@ with open('Sample Data/crime_data_total.csv', 'w') as f:
         for monthId in zip_code_data[zip_code]:
             row = [zip_code, monthId]
             data_dict = zip_code_data[zip_code][monthId]
-            add_data(row, data_dict, tc, 'total_crime')
+            add_data(row, data_dict, tc, 'Crimes')
             rows.append(row)
     writer.writerows(rows)
