@@ -39,13 +39,19 @@ with open('data/Crime_Data_from_2010_to_Present.csv') as f:
             location_s = row['Location '].split(', ')
             lat = location_s[0][1:]
             lon = location_s[1][0:-1]
-            try:
-                geolocation = geolocator.reverse("{}, {}".format(lat, lon))
-                zip_code = geolocation.raw['address']['postcode']
-                zip_code = zip_p.search(zip_code).group(1)
-            except:
-                print('Got an error: {}'.format(row))
-                continue
+            successful_geo = False
+            while not successful_geo:
+                try:
+                    geolocation = geolocator.reverse("{}, {}".format(lat, lon))
+                    zip_code = geolocation.raw['address']['postcode']
+                    zip_code = zip_p.search(zip_code).group(1)
+                    successful_geo = True
+                except AttributeError:
+                    pass
+                except (geopy.exc.GeocoderTimedOut,geopy.exc.GeocoderUnavailable):
+                    pass
+                
+            
 
             dt = parser.parse(row['Date Occurred'])
 
