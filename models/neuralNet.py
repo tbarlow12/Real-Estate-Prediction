@@ -16,3 +16,6 @@ class neuralNet:
 
     def __init__(self):
         pass
+
+
+# http://neuralnetworksanddeeplearning.com/chap2.html, an long chapter on backpropagation and code that implements a neural network without libraries.

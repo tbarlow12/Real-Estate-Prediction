@@ -72,5 +72,3 @@ with open('Sample Data/crime_and_value.csv', 'w') as f:
             rows.append(row)
     writer.writerows(rows)
 
-
-# with open('Sample Data/ ')

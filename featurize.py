@@ -1,10 +1,10 @@
-# Converts the csv file into a feature set while combining the year and month
-
+# Converts the csv file into a feature set
 import csv
 
+examples = []
 
 def featurize():
-	with open("Sample Data/84070-UT.csv", "rb") as source, open("result", "wb") as result:
+	with open('Sample Data/crime_and_value.csv', "rb") as source:
 		rdr = csv.reader(source)
 
 		csv_headings = next(rdr)
@@ -22,7 +22,6 @@ def featurize():
 			example = []
 			for c in r:
 				example.append(c)
-				index += 1
 
 			examples.append(example)
 
