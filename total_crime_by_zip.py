@@ -17,7 +17,7 @@ geocoderDotUS = GeocoderDotUS(timeout=100)
 googlev3 = GoogleV3(timeout=100)
 openmapquest = OpenMapQuest(timeout=100)
 
-geocoders = [googlev3, bing, nominatim, geocoderDotUS, opencage, openmapquest, arcgis]
+geocoders = [nominatim, googlev3, bing, geocoderDotUS, opencage, openmapquest, arcgis]
 
 zip_code_data = {}
 all_crime_codes = set()
