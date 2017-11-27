@@ -54,7 +54,21 @@ def load_encoded(path):
             '''
         return [row[0:-1] for row in rows],[row[-1] for row in rows]
                 
-
+def featurize_file(path):
+	with open(path) as f:
+		csv_dict = csv.DictReader(f)
+		x = []
+		y = []
+		for row in csv_dict:
+			zip = row['Region'].strip()[0:-3]
+			monthId = int(row['MonthId'].strip())
+			if 'Zip_MedianValuePerSqft_AllHomes' in row:
+				medianValue = float(row['Zip_MedianValuePerSqft_AllHomes'])
+				x.append([monthId])
+				y.append(medianValue)
+			else:
+				continue
+		return x, y
  
 # Convert string column to float
 def str_column_to_float(dataset, column):

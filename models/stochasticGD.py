@@ -22,7 +22,7 @@ class stochastic:
     def fit(self,x,y):
         _x = deepcopy(x)
         _y = deepcopy(y)
-        h.normalize_dataset(_x,_y)
+        #h.normalize_dataset(_x,_y)
         self.coef = [0.0 for i in range(len(_x[0]))]
         for epoch in range(self.n_epoch):
             sum_error = 0
@@ -36,6 +36,6 @@ class stochastic:
             #print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, self.l_rate, sum_error))
         return self.coef
 
-    def __init__(self,n_epoch,l_rate):
+    def __init__(self,n_epoch=10,l_rate=.1):
         self.n_epoch = n_epoch
         self.l_rate = l_rate
