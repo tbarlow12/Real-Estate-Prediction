@@ -17,6 +17,7 @@ zips = {}
 
 with open('Sample Data/crime_data_total.csv') as f:
     reader = list(csv.DictReader(f))
+    pdb.set_trace()
 
     i = 0
     for row in reader:
@@ -32,7 +33,7 @@ with open('Sample Data/crime_data_total.csv') as f:
 
 regex = '^[0-9]*-[A-Z][A-Z]$'
 
-DIR = '/Users/johnnyle/Machine Learning/Real-Estate-Prediction/Sample Data'
+DIR = 'Sample Data'
 directory_length = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
 for name in os.listdir(DIR):

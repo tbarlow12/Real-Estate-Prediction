@@ -1,1 +1,0 @@
-python3.6 organize_data.py
