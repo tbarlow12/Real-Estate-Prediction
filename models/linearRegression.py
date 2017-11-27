@@ -54,11 +54,12 @@ class linearRegression:
     def fit(self,x,y):
         #self.b0, self.b1 = self.coefficients(x)
         self.coef = []
+        self.bias = 0.0
         y_mean = mean(y)
         for i in range(len(x[0])):
-            x = [row[i] for row in x]
-            x_mean = mean(x)
-            x_coef = covariance(x, x_mean, y, y_mean) / variance(x, x_mean)
+            x_i = [row[i] for row in x]
+            x_mean = mean(x_i)
+            x_coef = covariance(x_i, x_mean, y, y_mean) / variance(x_i, x_mean)
             y_coef = y_mean - x_coef * x_mean
             self.coef.append([x_coef,y_coef])
 

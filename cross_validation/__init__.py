@@ -44,3 +44,16 @@ def cross_validate(model,x,y):
         model.fit(x_training,y_training)
         scores.append(evaluate_model(model,x_test,y_test))
     return np.mean(scores)
+
+def find_hypers(model,x,y,hypers):
+    best_score = float('inf')
+    if len(hypers) == 2:
+        best_params = [hypers[0][0],hypers[1][0]]
+        for hyper1 in hypers[0]:
+            for hyper2 in hypers[1]:
+                model.set_params(hyper1,hyper2)
+                score = cross_validate(model,x,y)
+                if score < best_score:
+                    best_score = score
+                    best_params = [hyper1,hyper2]
+        return best_params

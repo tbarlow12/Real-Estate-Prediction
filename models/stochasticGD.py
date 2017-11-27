@@ -1,6 +1,7 @@
 import pdb
 import numpy as np
 import helpers as h
+import cross_validation as cv
 from copy import deepcopy
 
 class stochastic:
@@ -20,6 +21,7 @@ class stochastic:
             return yhat
     
     def fit(self,x,y):
+        #self.set_params(params[0],params[1])
         _x = deepcopy(x)
         _y = deepcopy(y)
         #h.normalize_dataset(_x,_y)
@@ -35,6 +37,10 @@ class stochastic:
                     self.coef[i + 1] = self.coef[i + 1] - self.l_rate * error * features[i]
             #print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, self.l_rate, sum_error))
         return self.coef
+
+    def set_params(self,n_epoch,l_rate):
+        self.n_epoch = n_epoch
+        self.l_rate = l_rate
 
     def __init__(self,n_epoch=10,l_rate=.1):
         self.n_epoch = n_epoch
