@@ -7,20 +7,51 @@ from dateutil import parser
 import time
 import re
 
-geolocator = Nominatim()
+# geolocator = Nominatim()
+#
+# arcgis = ArcGIS(timeout=100)
+# bing = Bing('Ak1GEcWya63nbRV4w_negXAFv1qJhX6nB0uAAlcBk24BlNy06VCAAJnlq6rnGvLv',timeout=100)
+# nominatim = Nominatim(timeout=100)
+# opencage = OpenCage('640fbdc889384bc0b823f5a61d5c77ac',timeout=100)
+# geocoderDotUS = GeocoderDotUS(timeout=100)
+# googlev3 = GoogleV3(timeout=100)
+# openmapquest = OpenMapQuest(timeout=100)
 
-arcgis = ArcGIS(timeout=100)
-bing = Bing('Ak1GEcWya63nbRV4w_negXAFv1qJhX6nB0uAAlcBk24BlNy06VCAAJnlq6rnGvLv',timeout=100)
-nominatim = Nominatim(timeout=100)
-opencage = OpenCage('640fbdc889384bc0b823f5a61d5c77ac',timeout=100)
-geocoderDotUS = GeocoderDotUS(timeout=100)
-googlev3 = GoogleV3(timeout=100)
-openmapquest = OpenMapQuest(timeout=100)
-
-geocoders = [nominatim, googlev3, bing, geocoderDotUS, opencage, openmapquest, arcgis]
+# geocoders = [nominatim, googlev3, bing, geocoderDotUS, opencage, openmapquest, arcgis]
 
 zip_code_data = {}
 all_crime_codes = set()
+
+coords = {}
+
+with open('Sample Data/zipcodes_and_coords.csv') as f:
+    reader = list(csv.DictReader(f))
+    num_lines = len(reader)
+
+    for r in reader:
+
+        current_zip = r['ZIP']
+
+        latitude = r['LAT']
+        latitude = str(round(float(latitude), 2))
+
+        longitude = r['LNG']
+        longitude = str(round(float(longitude), 2))
+
+        if latitude in coords:
+            coords[latitude][longitude] = {
+                'ZIP': current_zip
+            }
+        else:
+            coords[latitude] = {
+                longitude: {
+                    'ZIP': current_zip
+                }
+            }
+
+        print(latitude + ", " + longitude)
+
+        print(coords[latitude][longitude]['ZIP'])
 
 
 def increment_or_create(data_dict, key):
@@ -47,36 +78,39 @@ with open('data/Crime_Data_from_2010_to_Present.csv') as f:
     reader = list(csv.DictReader(f))
     num_lines = len(reader)
     i = 0
-    geocoder_index = 0
-    
     for row in reader:
         if 'Location ' in row:
             location_s = row['Location '].split(', ')
+
+            if location_s[0][1:]=='':
+                continue
+
+            if location_s[1][1:]=='':
+                continue
+
             lat = location_s[0][1:]
             lon = location_s[1][0:-1]
-            successful_geo = False
-            while not successful_geo:
-                try:
-                    geolocator = geocoders[geocoder_index % len(geocoders)]
-                    geolocation = geolocator.reverse("{}, {}".format(lat, lon))
-                    zip_code = geolocation.raw['address']['postcode']
-                    zip_code = zip_p.search(zip_code).group(1)
-                    successful_geo = True
-                except AttributeError:
-                    if geolocation.raw['address']['postcode'] == 'SCV':
-                        zip_code = '91390'
-                        successful_geo = True
-                    else:
-                        print('\tgeolocation: {}'.format(geolocation.raw['address']))
-                except (geopy.exc.GeocoderTimedOut,geopy.exc.GeocoderUnavailable,geopy.exc.GeocoderInsufficientPrivileges):
-                    pass
-                except (geopy.exc.GeocoderServiceError,geopy.exc.GeocoderQuotaExceeded):
-                    time.sleep(10)
-                    geocoder_index += 1
-                except:
-                    print(sys.exc_info()[0])
-                    zip_code = 'N/A'
-                    successful_geo = True
+
+            lat = str(round(float(lat),2))
+
+            lon = str(round(float(lon),2))
+
+            if lat in coords:
+                if lon in coords[lat]:
+                    zip_code = coords[lat][lon]['ZIP']
+                else:
+                    while lon not in coords[lat]:
+                        lon = str(0.01 + float(lon))
+                    zip_code = coords[lat][lon]['ZIP']
+            else:
+                while lat not in coords:
+                    lat = str(0.01 + float(lat))
+                if lon in coords[lat]:
+                    zip_code = coords[lat][lon]['ZIP']
+                else:
+                    while lon not in coords[lat]:
+                        lon = str(0.01 + float(lon))
+                    zip_code = coords[lat][lon]['ZIP']
 
                 
             
@@ -129,6 +163,12 @@ with open('Sample Data/crime_data_total-2.csv', 'w') as f:
         for monthId in zip_code_data[zip_code]:
             row = [zip_code, monthId]
             data_dict = zip_code_data[zip_code][monthId]
-            add_data(row, data_dict, tc, 'Crimes')
+
+            if 'total_crime' in data_dict:
+                row.append(data_dict['total_crime']['total'])
+            else:
+                row.append(0)
+
+
             rows.append(row)
     writer.writerows(rows)

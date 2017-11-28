@@ -14,6 +14,39 @@ all_victim_ages = set()
 all_victim_sexes = set()
 all_victim_descents = set()
 
+coords = {}
+
+
+with open('Sample Data/zipcodes_and_coords.csv') as f:
+    reader = list(csv.DictReader(f))
+    num_lines = len(reader)
+
+    for r in reader:
+
+        current_zip = r['ZIP']
+
+        latitude = r['LAT']
+        latitude = str(round(float(latitude), 2))
+
+        longitude = r['LNG']
+        longitude = str(round(float(longitude), 2))
+
+        if latitude in coords:
+            coords[latitude][longitude] = {
+                'ZIP': current_zip
+            }
+        else:
+            coords[latitude] = {
+                longitude: {
+                    'ZIP': current_zip
+                }
+            }
+
+        print(latitude + ", " + longitude)
+
+        print(coords[latitude][longitude]['ZIP'])
+
+
 def increment_or_create(data_dict,key):
     if key in data_dict:
         data_dict[key] += 1
@@ -37,31 +70,63 @@ with open('data/Crime_Data_from_2010_to_Present.csv') as f:
     for row in reader:
         if 'Location ' in row:
             location_s = row['Location '].split(', ')
+
+            if location_s[0][1:]=='':
+                continue
+
+            if location_s[1][1:]=='':
+                continue
+
             lat = location_s[0][1:]
             lon = location_s[1][0:-1]
-            try:
-                geolocation = geolocator.reverse("{}, {}".format(lat,lon))
-                zip_code = geolocation.raw['address']['postcode']
-                zip_code = zip_p.search(zip_code).group(1)
-            except AttributeError:
-                print('Got an error: {}'.format(row))
-                continue
-            
+
+            lat = str(round(float(lat),2))
+
+            lon = str(round(float(lon),2))
+
+            if lat in coords:
+                if lon in coords[lat]:
+                    zip_code = coords[lat][lon]['ZIP']
+                else:
+                    while lon not in coords[lat]:
+                        lon = str(0.01 + float(lon))
+                    zip_code = coords[lat][lon]['ZIP']
+            else:
+                while lat not in coords:
+                    lat = str(0.01 + float(lat))
+                if lon in coords[lat]:
+                    zip_code = coords[lat][lon]['ZIP']
+                else:
+                    while lon not in coords[lat]:
+                        lon = str(0.01 + float(lon))
+                    zip_code = coords[lat][lon]['ZIP']
+
+
+            print(zip_code)
+
+            # try:
+            #     geolocation = geolocator.reverse("{}, {}".format(lat,lon))
+            #     zip_code = geolocation.raw['address']['postcode']
+            #     zip_code = zip_p.search(zip_code).group(1)
+            # except AttributeError:
+            #     print('Got an error: {}'.format(row))
+            #     continue
+
             dt = parser.parse(row['Date Occurred'])
 
             monthId = dt.year * 12 + dt.month
-            
+
             crime_code = get_col_value(row,'Crime Code')
             victim_age = get_col_value(row,'Victim Age')
             victim_sex = get_col_value(row,'Victim Sex')
             victim_descent = get_col_value(row,'Victim Descent')
 
-            
+
             all_crime_codes.add(crime_code)
             all_victim_ages.add(victim_age)
             all_victim_sexes.add(victim_sex)
             all_victim_descents.add(victim_descent)
-            
+
             if zip_code in zip_code_data:
                 if monthId in zip_code_data[zip_code]:
                     try:
