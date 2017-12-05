@@ -111,3 +111,30 @@ def find_min(data):
             min = i
     return min
 
+def get_feature_vector_separate(path,feature_names,label_name):
+    with open(path) as f:
+        reader = csv.DictReader(f)
+        result = {}
+        for row in reader:
+            vector = []
+            label = None
+            for key in row:
+                for feature in feature_names:
+                    if feature in key:
+                        vector.append(row[key])
+                if key == label_name:
+                    label = row[key]
+            if label is None:
+                raise ValueError('Couldn\'t find a label')      
+            zip = row['Zip Code']
+            if zip in result: 
+                result[zip][0].append(vector)
+                result[zip][1].append(label)
+            else:
+                result[zip] = [[vector],[label]]
+        return result
+            
+
+
+
+

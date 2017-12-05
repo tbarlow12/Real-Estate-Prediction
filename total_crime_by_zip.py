@@ -161,8 +161,6 @@ with open('data/Crime_Data_from_2010_to_Present.csv') as f:
                 }
             i += 1
             print(i)
-            if i > 1000:
-                break
             
 
 
@@ -174,7 +172,7 @@ def add_data(row, data_dict, data_list, name):
             row.append(0)
 
 
-with open('Sample Data/crime_data_total-2.csv', 'w') as f:
+with open('Sample Data/final_crime_data.csv', 'w') as f:
     writer = csv.writer(f)
 
     cc = list(all_crime_codes)

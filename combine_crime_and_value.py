@@ -5,6 +5,7 @@ import pdb
 from datetime import datetime
 from dateutil import parser
 import re
+import helpers as h
 
 def add_data(row, data_dict, data_list, name):
     for element in data_list:
@@ -14,7 +15,7 @@ def add_data(row, data_dict, data_list, name):
             row.append(0)
 
 zips = {}
-
+'''
 with open('Sample Data/crime_data_total.csv') as f:
     reader = list(csv.DictReader(f))
     pdb.set_trace()
@@ -30,46 +31,67 @@ with open('Sample Data/crime_data_total.csv') as f:
                     'MedianSquareValue': 0
                 },
             }
+'''
+all_features = set()
 
-regex = '^[0-9]*-[A-Z][A-Z]$'
+def get_dict_except(data_dict,row,exclude_titles):
+    if data_dict is None:
+        data_dict = {}
+    for key in row:
+        if key not in exclude_titles:
+            data_dict[key] = row[key]
+            all_features.add(key)
+    return data_dict
 
-DIR = 'Sample Data'
-directory_length = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 
-for name in os.listdir(DIR):
-    if os.path.isfile(os.path.join(DIR, name)):
-        if re.match(regex, name):
-            zip = name[:4]
+with open('Sample Data/final_crime_data.csv') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        row_zip = row['Zip Code']
+        month_id = row['MonthId']
+        if row_zip in zips:
+            zips[row_zip][month_id] = get_dict_except(None,row,['Zip Code','MonthId'])
+        else:
+            zips[row_zip] = {
+                month_id : get_dict_except(None,row,['Zip Code','MonthId'])
+            }
 
-            with open('data/' + name + '.csv') as g:
-                valueReader = list(csv.DictReader(g))
+data_path = 'Sample Data/california/'
 
-                i = 0
-                for row in valueReader:
-                    region_zip = row['Region'][:4]
-                    if region_zip in zips:
-                        zips[region_zip][row['MonthId']]['MedianSquareValue'] = row['Zip_MedianValuePerSqft_AllHomes']
-                    else:
-                        zips[row['Zip Code']] = {
-                            row['MonthId']: {
-                                'Crimes': 0,
-                                'MedianSquareValue': row['Zip_MedianValuePerSqft_AllHomes']
-                            },
-                        }
+california_real_estate_files = h.get_files_in_dir(data_path)
 
-with open('Sample Data/crime_and_value.csv', 'w') as f:
+for real_estate in california_real_estate_files:
+    zip = real_estate[0:5]
+    with open(data_path + real_estate) as g:
+        valueReader = csv.DictReader(g)
+        i = 0
+        for row in valueReader:
+            region_zip = row['Region'][0:5]
+            month_id = row['MonthId']
+            if region_zip in zips:
+                if month_id in zips[region_zip]:
+                    zips[region_zip][month_id] = get_dict_except(zips[region_zip][month_id],row,['Region','Year','Month','MonthId'])
+
+feature_list = list(all_features)
+feature_list.sort()
+
+missing_zips = set()
+
+with open('Sample Data/final_feature_set.csv', 'w') as f:
     writer = csv.writer(f)
 
-    tc = ['total']
-
-    headers = ['Zip Code', 'MonthId', 'Total', 'MedianSquareValue']
+    headers = ['Zip Code', 'MonthId'] + feature_list
     rows = [headers]
-
+    missing = 0
     for zip_code in zips:
         for monthId in zips[zip_code]:
             row = [zip_code, monthId]
             data_dict = zips[zip_code][monthId]
-            add_data(row, data_dict, tc, 'Crimes')
+            for feature in feature_list:
+                if feature in data_dict:
+                    row.append(data_dict[feature])
+                else:
+                    row.append('')
             rows.append(row)
     writer.writerows(rows)
 
