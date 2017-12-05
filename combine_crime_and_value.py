@@ -14,7 +14,6 @@ def add_data(row, data_dict, data_list, name):
         else:
             row.append(0)
 
-zips = {}
 '''
 with open('Sample Data/crime_data_total.csv') as f:
     reader = list(csv.DictReader(f))
@@ -32,7 +31,10 @@ with open('Sample Data/crime_data_total.csv') as f:
                 },
             }
 '''
+
 all_features = set()
+all_zips = set()
+all_months = set()
 
 def get_dict_except(data_dict,row,exclude_titles):
     if data_dict is None:
@@ -43,6 +45,30 @@ def get_dict_except(data_dict,row,exclude_titles):
             all_features.add(key)
     return data_dict
 
+def blank_feature_dict():
+    d = {}
+    for f in all_features:
+        d[f] = 0.0
+    return d
+
+
+zips = {}
+
+with open('Sample Data/final_crime_data.csv') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        all_zips.add(row['Zip Code'])
+        all_months.add(row['MonthId'])
+        get_dict_except(None,row,['Zip Code','MonthId'])
+
+for z in all_zips:
+    for m in all_months:
+        if z in zips:
+            zips[z][m] = blank_feature_dict()
+        else:
+            zips[z] = {
+                m : blank_feature_dict()
+            }
 
 with open('Sample Data/final_crime_data.csv') as f:
     reader = csv.DictReader(f)
@@ -73,7 +99,7 @@ for real_estate in california_real_estate_files:
                     zips[region_zip][month_id] = get_dict_except(zips[region_zip][month_id],row,['Region','Year','Month','MonthId'])
 
 feature_list = list(all_features)
-feature_list.sort()
+feature_list.sort(reverse=True)
 
 missing_zips = set()
 
