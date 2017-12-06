@@ -111,6 +111,8 @@ def find_min(data):
             min = i
     return min
 
+all_features = set()
+
 def get_feature_vector_separate(path,feature_names,label_name):
     with open(path) as f:
         reader = csv.DictReader(f)
@@ -120,8 +122,9 @@ def get_feature_vector_separate(path,feature_names,label_name):
             label = None
             has_all_features = True
             for key in row:
+                all_features.add(key)
                 for feature_name in feature_names:
-                    if feature_name in key:
+                    if key.startswith(feature_name):
                         if row[key] != '':
                             vector.append(float(row[key]))
                         else:
@@ -136,7 +139,14 @@ def get_feature_vector_separate(path,feature_names,label_name):
                     result[zip][1].append(label)
                 else:
                     result[zip] = [[vector],[label]]
+        with open('all_features.txt','w') as f:
+            features = list(all_features)
+            features.sort()
+            for feature in features:
+                f.write(feature + '\n')
         return result
+    
+
             
 
 

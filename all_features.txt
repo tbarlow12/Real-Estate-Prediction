@@ -1,0 +1,340 @@
+Crime Code=110
+Crime Code=113
+Crime Code=121
+Crime Code=122
+Crime Code=210
+Crime Code=220
+Crime Code=230
+Crime Code=231
+Crime Code=235
+Crime Code=236
+Crime Code=237
+Crime Code=250
+Crime Code=251
+Crime Code=310
+Crime Code=320
+Crime Code=330
+Crime Code=331
+Crime Code=341
+Crime Code=343
+Crime Code=345
+Crime Code=347
+Crime Code=349
+Crime Code=350
+Crime Code=351
+Crime Code=352
+Crime Code=353
+Crime Code=354
+Crime Code=410
+Crime Code=420
+Crime Code=421
+Crime Code=432
+Crime Code=433
+Crime Code=434
+Crime Code=435
+Crime Code=436
+Crime Code=437
+Crime Code=438
+Crime Code=439
+Crime Code=440
+Crime Code=441
+Crime Code=442
+Crime Code=443
+Crime Code=444
+Crime Code=445
+Crime Code=446
+Crime Code=450
+Crime Code=451
+Crime Code=452
+Crime Code=453
+Crime Code=470
+Crime Code=471
+Crime Code=472
+Crime Code=473
+Crime Code=474
+Crime Code=475
+Crime Code=480
+Crime Code=485
+Crime Code=487
+Crime Code=510
+Crime Code=520
+Crime Code=622
+Crime Code=623
+Crime Code=624
+Crime Code=625
+Crime Code=626
+Crime Code=627
+Crime Code=647
+Crime Code=648
+Crime Code=649
+Crime Code=651
+Crime Code=652
+Crime Code=653
+Crime Code=654
+Crime Code=660
+Crime Code=661
+Crime Code=662
+Crime Code=664
+Crime Code=666
+Crime Code=668
+Crime Code=670
+Crime Code=740
+Crime Code=745
+Crime Code=753
+Crime Code=755
+Crime Code=756
+Crime Code=760
+Crime Code=761
+Crime Code=762
+Crime Code=763
+Crime Code=805
+Crime Code=806
+Crime Code=810
+Crime Code=812
+Crime Code=813
+Crime Code=814
+Crime Code=815
+Crime Code=820
+Crime Code=821
+Crime Code=822
+Crime Code=830
+Crime Code=840
+Crime Code=850
+Crime Code=860
+Crime Code=865
+Crime Code=870
+Crime Code=880
+Crime Code=882
+Crime Code=884
+Crime Code=886
+Crime Code=888
+Crime Code=890
+Crime Code=900
+Crime Code=901
+Crime Code=902
+Crime Code=903
+Crime Code=906
+Crime Code=910
+Crime Code=920
+Crime Code=921
+Crime Code=922
+Crime Code=924
+Crime Code=926
+Crime Code=928
+Crime Code=930
+Crime Code=931
+Crime Code=932
+Crime Code=933
+Crime Code=940
+Crime Code=942
+Crime Code=943
+Crime Code=944
+Crime Code=946
+Crime Code=948
+Crime Code=949
+Crime Code=950
+Crime Code=951
+Crime Code=952
+Crime Code=954
+Crime Code=956
+MonthId
+Victim Age=10
+Victim Age=11
+Victim Age=12
+Victim Age=13
+Victim Age=14
+Victim Age=15
+Victim Age=16
+Victim Age=17
+Victim Age=18
+Victim Age=19
+Victim Age=20
+Victim Age=21
+Victim Age=22
+Victim Age=23
+Victim Age=24
+Victim Age=25
+Victim Age=26
+Victim Age=27
+Victim Age=28
+Victim Age=29
+Victim Age=30
+Victim Age=31
+Victim Age=32
+Victim Age=33
+Victim Age=34
+Victim Age=35
+Victim Age=36
+Victim Age=37
+Victim Age=38
+Victim Age=39
+Victim Age=40
+Victim Age=41
+Victim Age=42
+Victim Age=43
+Victim Age=44
+Victim Age=45
+Victim Age=46
+Victim Age=47
+Victim Age=48
+Victim Age=49
+Victim Age=50
+Victim Age=51
+Victim Age=52
+Victim Age=53
+Victim Age=54
+Victim Age=55
+Victim Age=56
+Victim Age=57
+Victim Age=58
+Victim Age=59
+Victim Age=60
+Victim Age=61
+Victim Age=62
+Victim Age=63
+Victim Age=64
+Victim Age=65
+Victim Age=66
+Victim Age=67
+Victim Age=68
+Victim Age=69
+Victim Age=70
+Victim Age=71
+Victim Age=72
+Victim Age=73
+Victim Age=74
+Victim Age=75
+Victim Age=76
+Victim Age=77
+Victim Age=78
+Victim Age=79
+Victim Age=80
+Victim Age=81
+Victim Age=82
+Victim Age=83
+Victim Age=84
+Victim Age=85
+Victim Age=86
+Victim Age=87
+Victim Age=88
+Victim Age=89
+Victim Age=90
+Victim Age=91
+Victim Age=92
+Victim Age=93
+Victim Age=94
+Victim Age=95
+Victim Age=96
+Victim Age=97
+Victim Age=98
+Victim Age=99
+Victim Age=NONE
+Victim Descent=-
+Victim Descent=A
+Victim Descent=B
+Victim Descent=C
+Victim Descent=D
+Victim Descent=F
+Victim Descent=G
+Victim Descent=H
+Victim Descent=I
+Victim Descent=J
+Victim Descent=K
+Victim Descent=L
+Victim Descent=NONE
+Victim Descent=O
+Victim Descent=P
+Victim Descent=S
+Victim Descent=U
+Victim Descent=V
+Victim Descent=W
+Victim Descent=X
+Victim Descent=Z
+Victim Sex=-
+Victim Sex=F
+Victim Sex=H
+Victim Sex=M
+Victim Sex=NONE
+Victim Sex=X
+Zip Code
+Zip_Listings_PriceCut_SeasAdj_AllHomes
+Zip_Listings_PriceCut_SeasAdj_Condominum
+Zip_Listings_PriceCut_SeasAdj_SingleFamilyResidence
+Zip_MedianListingPricePerSqft_1Bedroom
+Zip_MedianListingPricePerSqft_2Bedroom
+Zip_MedianListingPricePerSqft_3Bedroom
+Zip_MedianListingPricePerSqft_4Bedroom
+Zip_MedianListingPricePerSqft_5BedroomOrMore
+Zip_MedianListingPricePerSqft_AllHomes
+Zip_MedianListingPricePerSqft_CondoCoop
+Zip_MedianListingPricePerSqft_DuplexTriplex
+Zip_MedianListingPricePerSqft_Sfr
+Zip_MedianListingPrice_1Bedroom
+Zip_MedianListingPrice_2Bedroom
+Zip_MedianListingPrice_3Bedroom
+Zip_MedianListingPrice_4Bedroom
+Zip_MedianListingPrice_5BedroomOrMore
+Zip_MedianListingPrice_AllHomes
+Zip_MedianListingPrice_CondoCoop
+Zip_MedianListingPrice_DuplexTriplex
+Zip_MedianListingPrice_Sfr
+Zip_MedianPctOfPriceReduction_AllHomes
+Zip_MedianPctOfPriceReduction_Condominum
+Zip_MedianPctOfPriceReduction_SingleFamilyResidence
+Zip_MedianRentalPricePerSqft_1Bedroom
+Zip_MedianRentalPricePerSqft_2Bedroom
+Zip_MedianRentalPricePerSqft_3Bedroom
+Zip_MedianRentalPricePerSqft_4Bedroom
+Zip_MedianRentalPricePerSqft_5BedroomOrMore
+Zip_MedianRentalPricePerSqft_AllHomes
+Zip_MedianRentalPricePerSqft_CondoCoop
+Zip_MedianRentalPricePerSqft_DuplexTriplex
+Zip_MedianRentalPricePerSqft_Mfr5Plus
+Zip_MedianRentalPricePerSqft_Sfr
+Zip_MedianRentalPricePerSqft_Studio
+Zip_MedianRentalPrice_1Bedroom
+Zip_MedianRentalPrice_2Bedroom
+Zip_MedianRentalPrice_3Bedroom
+Zip_MedianRentalPrice_4Bedroom
+Zip_MedianRentalPrice_5BedroomOrMore
+Zip_MedianRentalPrice_AllHomes
+Zip_MedianRentalPrice_CondoCoop
+Zip_MedianRentalPrice_DuplexTriplex
+Zip_MedianRentalPrice_Mfr5Plus
+Zip_MedianRentalPrice_Sfr
+Zip_MedianRentalPrice_Studio
+Zip_MedianValuePerSqft_AllHomes
+Zip_Median_PriceCut_Dollar_AllHomes
+Zip_Median_PriceCut_Dollar_Condominum
+Zip_Median_PriceCut_Dollar_SingleFamilyResidence
+Zip_PctOfHomesDecreasingInValues_AllHomes
+Zip_PctOfHomesIncreasingInValues_AllHomes
+Zip_PctOfListingsWithPriceReductions_AllHomes
+Zip_PctOfListingsWithPriceReductions_Condominum
+Zip_PctOfListingsWithPriceReductions_SingleFamilyResidence
+Zip_PriceToRentRatio_AllHomes
+Zip_Zhvi_1bedroom
+Zip_Zhvi_2bedroom
+Zip_Zhvi_3bedroom
+Zip_Zhvi_4bedroom
+Zip_Zhvi_5BedroomOrMore
+Zip_Zhvi_AllHomes
+Zip_Zhvi_BottomTier
+Zip_Zhvi_BottomTier_yoy
+Zip_Zhvi_Condominum
+Zip_Zhvi_MiddleTier
+Zip_Zhvi_MiddleTier_yoy
+Zip_Zhvi_SingleFamilyResidence
+Zip_Zhvi_Summary_AllHomes
+Zip_Zhvi_TopTier
+Zip_Zhvi_TopTier_yoy
+Zip_ZriPerSqft_AllHomes
+Zip_Zri_AllHomes
+Zip_Zri_AllHomesPlusMultifamily
+Zip_Zri_AllHomesPlusMultifamily_Summary
+Zip_Zri_AllHomes_Summary
+Zip_Zri_MultiFamilyResidenceRental
+Zip_Zri_MultiFamilyResidenceRental_Summary
+Zip_Zri_SingleFamilyResidenceRental
+Zip_Zri_SingleFamilyResidenceRental_Summary
+total

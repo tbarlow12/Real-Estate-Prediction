@@ -46,7 +46,7 @@ class stochastic_gd:
         self.n_epoch = n_epoch
         self.l_rate = l_rate
 
-class baseline:
+class baseline_classifier:
 
     def fit(self,x,y):
         self.mean = np.mean(y)

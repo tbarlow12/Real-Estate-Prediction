@@ -1,6 +1,6 @@
 import helpers as h 
 import pdb
-import models
+from models import baseline_classifier
 import cross_validation as cv
 from sklearn.linear_model import Ridge, Lasso, LinearRegression, SGDClassifier
 import numpy as np
@@ -8,8 +8,8 @@ import numpy as np
 
 zip_code_separated_data = h.get_feature_vector_separate(
     'data_collection/Sample Data/final_feature_set.csv',
-    ['MonthId','Crime Code'],
-    'Zip_MedianValuePerSqft_AllHomes')
+    ['MonthId','total'], #features
+    'Zip_MedianValuePerSqft_AllHomes') #label
 
 zip_codes = []
 sk_linear = []
@@ -34,7 +34,7 @@ for zip_code in zip_code_separated_data:
     sk_lasso.append(lasso_score)
     sk_sgd.append(sgd_score)
 
-    baseline_score = cv.cross_validate(models.baseline(),features,labels)
+    baseline_score = cv.cross_validate(baseline_classifier(),features,labels)
     baseline.append(baseline_score)
 
 
