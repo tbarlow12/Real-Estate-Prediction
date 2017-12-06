@@ -1,7 +1,10 @@
 import math
 import pdb
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
+
+matplotlib.use('Agg')
 
 def k_folds(x,y,k):
     count = float(len(x))
@@ -32,18 +35,15 @@ def plot_results(x_axis, actual, predictions, path):
     plt.plot(x_axis, actual, 'r-', x_axis, predictions, 'b-')
     plt.savefig(path)
 
-
-
 def evaluate_model(model,x,y,graph_path):
     results = model.predict(x)
     if graph_path is not None:
         x_axis = [row[0] for row in x]
         plot_results(x_axis, y, results, graph_path)
     return rmse_metric(results,y)
-    
 
 def cross_validate(model,x,y,name=None):
-    k = 2
+    k = 10
     x_folds, y_folds = k_folds(x,y,k)
     scores = []
     for i in range(0,k):
