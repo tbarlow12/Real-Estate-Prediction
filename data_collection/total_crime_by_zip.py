@@ -102,6 +102,8 @@ with open('data/Crime_Data_from_2010_to_Present.csv') as f:
             monthId = dt.year * 12 + dt.month
 
             crime_code = get_col_value(row,'Crime Code')
+            description = get_col_value(row,'Crime Code Description')
+            crime_code += ' ' + description
             victim_age = get_col_value(row,'Victim Age')
             victim_sex = get_col_value(row,'Victim Sex')
             victim_descent = get_col_value(row,'Victim Descent')

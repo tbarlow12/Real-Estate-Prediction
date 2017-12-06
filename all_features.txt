@@ -1,142 +1,142 @@
-Crime Code=110
-Crime Code=113
-Crime Code=121
-Crime Code=122
-Crime Code=210
-Crime Code=220
-Crime Code=230
-Crime Code=231
-Crime Code=235
-Crime Code=236
-Crime Code=237
-Crime Code=250
-Crime Code=251
-Crime Code=310
-Crime Code=320
-Crime Code=330
-Crime Code=331
-Crime Code=341
-Crime Code=343
-Crime Code=345
-Crime Code=347
-Crime Code=349
-Crime Code=350
-Crime Code=351
-Crime Code=352
-Crime Code=353
-Crime Code=354
-Crime Code=410
-Crime Code=420
-Crime Code=421
-Crime Code=432
-Crime Code=433
-Crime Code=434
-Crime Code=435
-Crime Code=436
-Crime Code=437
-Crime Code=438
-Crime Code=439
-Crime Code=440
-Crime Code=441
-Crime Code=442
-Crime Code=443
-Crime Code=444
-Crime Code=445
-Crime Code=446
-Crime Code=450
-Crime Code=451
-Crime Code=452
-Crime Code=453
-Crime Code=470
-Crime Code=471
-Crime Code=472
-Crime Code=473
-Crime Code=474
-Crime Code=475
-Crime Code=480
-Crime Code=485
-Crime Code=487
-Crime Code=510
-Crime Code=520
-Crime Code=622
-Crime Code=623
-Crime Code=624
-Crime Code=625
-Crime Code=626
-Crime Code=627
-Crime Code=647
-Crime Code=648
-Crime Code=649
-Crime Code=651
-Crime Code=652
-Crime Code=653
-Crime Code=654
-Crime Code=660
-Crime Code=661
-Crime Code=662
-Crime Code=664
-Crime Code=666
-Crime Code=668
-Crime Code=670
-Crime Code=740
-Crime Code=745
-Crime Code=753
-Crime Code=755
-Crime Code=756
-Crime Code=760
-Crime Code=761
-Crime Code=762
-Crime Code=763
-Crime Code=805
-Crime Code=806
-Crime Code=810
-Crime Code=812
-Crime Code=813
-Crime Code=814
-Crime Code=815
-Crime Code=820
-Crime Code=821
-Crime Code=822
-Crime Code=830
-Crime Code=840
-Crime Code=850
-Crime Code=860
-Crime Code=865
-Crime Code=870
-Crime Code=880
-Crime Code=882
-Crime Code=884
-Crime Code=886
-Crime Code=888
-Crime Code=890
-Crime Code=900
-Crime Code=901
-Crime Code=902
-Crime Code=903
-Crime Code=906
-Crime Code=910
-Crime Code=920
-Crime Code=921
-Crime Code=922
-Crime Code=924
-Crime Code=926
-Crime Code=928
-Crime Code=930
-Crime Code=931
-Crime Code=932
-Crime Code=933
-Crime Code=940
-Crime Code=942
-Crime Code=943
-Crime Code=944
-Crime Code=946
-Crime Code=948
-Crime Code=949
-Crime Code=950
-Crime Code=951
-Crime Code=952
-Crime Code=954
-Crime Code=956
+Crime Code=110 Crime Code Description=CRIMINAL HOMICIDE
+Crime Code=113 Crime Code Description=MANSLAUGHTER, NEGLIGENT
+Crime Code=121 Crime Code Description=RAPE, FORCIBLE
+Crime Code=122 Crime Code Description=RAPE, ATTEMPTED
+Crime Code=210 Crime Code Description=ROBBERY
+Crime Code=220 Crime Code Description=ATTEMPTED ROBBERY
+Crime Code=230 Crime Code Description=ASSAULT WITH DEADLY WEAPON, AGGRAVATED ASSAULT
+Crime Code=231 Crime Code Description=ASSAULT WITH DEADLY WEAPON ON POLICE OFFICER
+Crime Code=235 Crime Code Description=CHILD ABUSE (PHYSICAL) - AGGRAVATED ASSAULT
+Crime Code=236 Crime Code Description=INTIMATE PARTNER - AGGRAVATED ASSAULT
+Crime Code=237 Crime Code Description=CHILD NEGLECT (SEE 300 W.I.C.)
+Crime Code=250 Crime Code Description=SHOTS FIRED AT MOVING VEHICLE, TRAIN OR AIRCRAFT
+Crime Code=251 Crime Code Description=SHOTS FIRED AT INHABITED DWELLING
+Crime Code=310 Crime Code Description=BURGLARY
+Crime Code=320 Crime Code Description=BURGLARY, ATTEMPTED
+Crime Code=330 Crime Code Description=BURGLARY FROM VEHICLE
+Crime Code=331 Crime Code Description=THEFT FROM MOTOR VEHICLE - GRAND ($400 AND OVER)
+Crime Code=341 Crime Code Description=THEFT-GRAND ($950.01 & OVER)EXCPT,GUNS,FOWL,LIVESTK,PROD0036
+Crime Code=343 Crime Code Description=SHOPLIFTING-GRAND THEFT ($950.01 & OVER)
+Crime Code=345 Crime Code Description=DISHONEST EMPLOYEE - GRAND THEFT
+Crime Code=347 Crime Code Description=GRAND THEFT / INSURANCE FRAUD
+Crime Code=349 Crime Code Description=GRAND THEFT / AUTO REPAIR
+Crime Code=350 Crime Code Description=THEFT, PERSON
+Crime Code=351 Crime Code Description=PURSE SNATCHING
+Crime Code=352 Crime Code Description=PICKPOCKET
+Crime Code=353 Crime Code Description=DRUNK ROLL
+Crime Code=354 Crime Code Description=THEFT OF IDENTITY
+Crime Code=410 Crime Code Description=BURGLARY FROM VEHICLE, ATTEMPTED
+Crime Code=420 Crime Code Description=THEFT FROM MOTOR VEHICLE - PETTY ($950 & UNDER)
+Crime Code=421 Crime Code Description=THEFT FROM MOTOR VEHICLE - ATTEMPT
+Crime Code=432 Crime Code Description=BLOCKING DOOR INDUCTION CENTER
+Crime Code=433 Crime Code Description=DRIVING WITHOUT OWNER CONSENT (DWOC)
+Crime Code=434 Crime Code Description=FALSE IMPRISONMENT
+Crime Code=435 Crime Code Description=LYNCHING
+Crime Code=436 Crime Code Description=LYNCHING - ATTEMPTED
+Crime Code=437 Crime Code Description=RESISTING ARREST
+Crime Code=438 Crime Code Description=RECKLESS DRIVING
+Crime Code=439 Crime Code Description=FALSE POLICE REPORT
+Crime Code=440 Crime Code Description=THEFT PLAIN - PETTY ($950 & UNDER)
+Crime Code=441 Crime Code Description=THEFT PLAIN - ATTEMPT
+Crime Code=442 Crime Code Description=SHOPLIFTING - PETTY THEFT ($950 & UNDER)
+Crime Code=443 Crime Code Description=SHOPLIFTING - ATTEMPT
+Crime Code=444 Crime Code Description=DISHONEST EMPLOYEE - PETTY THEFT
+Crime Code=445 Crime Code Description=DISHONEST EMPLOYEE ATTEMPTED THEFT
+Crime Code=446 Crime Code Description=PETTY THEFT - AUTO REPAIR
+Crime Code=450 Crime Code Description=THEFT FROM PERSON - ATTEMPT
+Crime Code=451 Crime Code Description=PURSE SNATCHING - ATTEMPT
+Crime Code=452 Crime Code Description=PICKPOCKET, ATTEMPT
+Crime Code=453 Crime Code Description=DRUNK ROLL - ATTEMPT
+Crime Code=470 Crime Code Description=TILL TAP - GRAND THEFT ($950.01 & OVER)
+Crime Code=471 Crime Code Description=TILL TAP - PETTY ($950 & UNDER)
+Crime Code=472 Crime Code Description=TILL TAP - ATTEMPT
+Crime Code=473 Crime Code Description=THEFT, COIN MACHINE - GRAND ($950.01 & OVER)
+Crime Code=474 Crime Code Description=THEFT, COIN MACHINE - PETTY ($950 & UNDER)
+Crime Code=475 Crime Code Description=THEFT, COIN MACHINE - ATTEMPT
+Crime Code=480 Crime Code Description=BIKE - STOLEN
+Crime Code=485 Crime Code Description=BIKE - ATTEMPTED STOLEN
+Crime Code=487 Crime Code Description=BOAT - STOLEN
+Crime Code=510 Crime Code Description=VEHICLE - STOLEN
+Crime Code=520 Crime Code Description=VEHICLE - ATTEMPT STOLEN
+Crime Code=622 Crime Code Description=BATTERY ON A FIREFIGHTER
+Crime Code=623 Crime Code Description=BATTERY POLICE (SIMPLE)
+Crime Code=624 Crime Code Description=BATTERY - SIMPLE ASSAULT
+Crime Code=625 Crime Code Description=OTHER ASSAULT
+Crime Code=626 Crime Code Description=INTIMATE PARTNER - SIMPLE ASSAULT
+Crime Code=627 Crime Code Description=CHILD ABUSE (PHYSICAL) - SIMPLE ASSAULT
+Crime Code=647 Crime Code Description=THROWING OBJECT AT MOVING VEHICLE
+Crime Code=648 Crime Code Description=ARSON
+Crime Code=649 Crime Code Description=DOCUMENT FORGERY / STOLEN FELONY
+Crime Code=651 Crime Code Description=DOCUMENT WORTHLESS ($200.01 & OVER)
+Crime Code=652 Crime Code Description=DOCUMENT WORTHLESS ($200 & UNDER)
+Crime Code=653 Crime Code Description=CREDIT CARDS, FRAUD USE ($950.01 & OVER)
+Crime Code=654 Crime Code Description=CREDIT CARDS, FRAUD USE ($950 & UNDER
+Crime Code=660 Crime Code Description=COUNTERFEIT
+Crime Code=661 Crime Code Description=UNAUTHORIZED COMPUTER ACCESS
+Crime Code=662 Crime Code Description=BUNCO, GRAND THEFT
+Crime Code=664 Crime Code Description=BUNCO, PETTY THEFT
+Crime Code=666 Crime Code Description=BUNCO, ATTEMPT
+Crime Code=668 Crime Code Description=EMBEZZLEMENT, GRAND THEFT ($950.01 & OVER)
+Crime Code=670 Crime Code Description=EMBEZZLEMENT, PETTY THEFT ($950 & UNDER)
+Crime Code=740 Crime Code Description=VANDALISM - FELONY ($400 & OVER, ALL CHURCH VANDALISMS) 0114
+Crime Code=745 Crime Code Description=VANDALISM - MISDEAMEANOR ($399 OR UNDER)
+Crime Code=753 Crime Code Description=DISCHARGE FIREARMS/SHOTS FIRED
+Crime Code=755 Crime Code Description=BOMB SCARE
+Crime Code=756 Crime Code Description=WEAPONS POSSESSION/BOMBING
+Crime Code=760 Crime Code Description=NONE
+Crime Code=761 Crime Code Description=BRANDISH WEAPON
+Crime Code=762 Crime Code Description=LEWD CONDUCT
+Crime Code=763 Crime Code Description=STALKING
+Crime Code=805 Crime Code Description=PIMPING
+Crime Code=806 Crime Code Description=PANDERING
+Crime Code=810 Crime Code Description=SEX, UNLAWFUL
+Crime Code=812 Crime Code Description=CRM AGNST CHLD (13 OR UNDER) (14-15 & SUSP 10 YRS OLDER)0060
+Crime Code=813 Crime Code Description=CHILD ANNOYING (17YRS & UNDER)
+Crime Code=814 Crime Code Description=NONE
+Crime Code=815 Crime Code Description=SEXUAL PENTRATION WITH A FOREIGN OBJECT
+Crime Code=820 Crime Code Description=ORAL COPULATION
+Crime Code=821 Crime Code Description=SODOMY/SEXUAL CONTACT B/W PENIS OF ONE PERS TO ANUS OTH 0007=02
+Crime Code=822 Crime Code Description=NONE
+Crime Code=830 Crime Code Description=INCEST (SEXUAL ACTS BETWEEN BLOOD RELATIVES)
+Crime Code=840 Crime Code Description=BEASTIALITY, CRIME AGAINST NATURE SEXUAL ASSLT WITH ANIM0065
+Crime Code=850 Crime Code Description=INDECENT EXPOSURE
+Crime Code=860 Crime Code Description=BATTERY WITH SEXUAL CONTACT
+Crime Code=865 Crime Code Description=DRUGS, TO A MINOR
+Crime Code=870 Crime Code Description=CHILD ABANDONMENT
+Crime Code=880 Crime Code Description=DISRUPT SCHOOL
+Crime Code=882 Crime Code Description=INCITING A RIOT
+Crime Code=884 Crime Code Description=FAILURE TO DISPERSE
+Crime Code=886 Crime Code Description=DISTURBING THE PEACE
+Crime Code=888 Crime Code Description=TRESPASSING
+Crime Code=890 Crime Code Description=FAILURE TO YIELD
+Crime Code=900 Crime Code Description=VIOLATION OF COURT ORDER
+Crime Code=901 Crime Code Description=VIOLATION OF RESTRAINING ORDER
+Crime Code=902 Crime Code Description=VIOLATION OF TEMPORARY RESTRAINING ORDER
+Crime Code=903 Crime Code Description=CONTEMPT OF COURT
+Crime Code=906 Crime Code Description=FIREARMS RESTRAINING ORDER (FIREARMS RO)
+Crime Code=910 Crime Code Description=KIDNAPPING
+Crime Code=920 Crime Code Description=KIDNAPPING - GRAND ATTEMPT
+Crime Code=921 Crime Code Description=NONE
+Crime Code=922 Crime Code Description=CHILD STEALING
+Crime Code=924 Crime Code Description=TELEPHONE PROPERTY - DAMAGE
+Crime Code=926 Crime Code Description=TRAIN WRECKING
+Crime Code=928 Crime Code Description=THREATENING PHONE CALLS/LETTERS
+Crime Code=930 Crime Code Description=CRIMINAL THREATS - NO WEAPON DISPLAYED
+Crime Code=931 Crime Code Description=REPLICA FIREARMS(SALE,DISPLAY,MANUFACTURE OR DISTRIBUTE)0132
+Crime Code=932 Crime Code Description=PEEPING TOM
+Crime Code=933 Crime Code Description=PROWLER
+Crime Code=940 Crime Code Description=EXTORTION
+Crime Code=942 Crime Code Description=BRIBERY
+Crime Code=943 Crime Code Description=CRUELTY TO ANIMALS
+Crime Code=944 Crime Code Description=CONSPIRACY
+Crime Code=946 Crime Code Description=OTHER MISCELLANEOUS CRIME
+Crime Code=948 Crime Code Description=BIGAMY
+Crime Code=949 Crime Code Description=ILLEGAL DUMPING
+Crime Code=950 Crime Code Description=DEFRAUDING INNKEEPER/THEFT OF SERVICES, OVER $400
+Crime Code=951 Crime Code Description=DEFRAUDING INNKEEPER/THEFT OF SERVICES, $400 & UNDER
+Crime Code=952 Crime Code Description=ABORTION/ILLEGAL
+Crime Code=954 Crime Code Description=CONTRIBUTING
+Crime Code=956 Crime Code Description=LETTERS, LEWD
 MonthId
 Victim Age=10
 Victim Age=11
