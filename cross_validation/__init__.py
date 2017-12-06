@@ -47,16 +47,14 @@ def plot_results(x_axis, actual, predictions, path):
     plt.savefig(path)
     plt.clf()
 
-include_graphs = False
-
-def evaluate_model(model,x,y,graph_path):
+def evaluate_model(model,x,y,graph_path,include_graphs):
     results = model.predict(x)
     if graph_path is not None and include_graphs:
         x_axis = [row[0] for row in x]
         plot_results(x_axis, y, results, graph_path)
     return rmse_metric(results,y)
 
-def cross_validate(model,x,y,name=None):
+def cross_validate(model,x,y,name=None,include_graphs=False):
     k = 10
     x_folds, y_folds = k_folds(x,y,k)
     scores = []
@@ -70,21 +68,14 @@ def cross_validate(model,x,y,name=None):
             new_name = 'graphs/{}-fold{}.png'.format(name,i)
         else:
             new_name = None
-        score = evaluate_model(model,x_test,y_test,new_name)
+        score = evaluate_model(model,x_test,y_test,new_name,include_graphs)
         scores.append(score)
     return np.mean(scores)
 
-def shuffle_xy(x,y):
-    result = []
-    for x_row,y_row in zip(x,y):
-        result.append([x_row,y_row])
-    shuffle(result)
-    return [pair[0] for pair in result], [pair[1] for pair in result]
     
 
-def eval_split(model,x,y,split=.75,name=None):
+def eval_split(model,x,y,split=.75,name=None,include_graphs=False):
     training_size = math.floor(split * len(x))
-    #new_x, new_y = shuffle_xy(x,y)
     train_x = x[0:training_size]
     train_y = y[0:training_size]
     test_x = x[training_size:]
@@ -94,7 +85,7 @@ def eval_split(model,x,y,split=.75,name=None):
         path = 'graphs/{}.png'.format(name)
     else:
         path = None
-    score = evaluate_model(model,test_x,test_y,path)
+    score = evaluate_model(model,test_x,test_y,path,include_graphs)
     return score
 
 

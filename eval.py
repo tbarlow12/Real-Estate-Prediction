@@ -6,7 +6,9 @@ from sklearn.linear_model import Ridge, Lasso, LinearRegression, SGDClassifier
 import numpy as np
 
 def print_stats(model_name,cv_list,split_list):
-    print('{0}\t{1:.2f}\t{2:.2f}\t{3:.2f}\t{4:.2f}'.format(
+    while len(model_name) < 8:
+        model_name += ' '
+    print('{0}\t{1:.3f}\t{2:.3f}\t{3:.3f}\t{4:.3f}'.format(
         model_name,
         np.mean(cv_list),
         np.std(cv_list),
@@ -19,7 +21,7 @@ def evaluate_separated():
 
     zip_code_separated_data = h.get_feature_vector_separate(
         'data_collection/Sample Data/final_feature_set.csv',
-        ['MonthId','total'], #features
+        ['MonthId','total','Crime Code'], #features
         'Zip_MedianValuePerSqft_AllHomes') #label
 
     zip_codes = []
@@ -68,11 +70,11 @@ def evaluate_separated():
         my_ridge_split.append(cv.eval_split(ridge(),x,y,name='{}/my_ridge'.format(zip_code)))
         
 
-    print('Model\tCV Mean\tCV Std\tSplit Mean\tSplit Std')
-    print_stats('Sklearn Linear',sk_linear_cv,sk_linear_split)
-    print_stats('Sklearn Ridge',sk_ridge_cv,sk_ridge_split)
-    print_stats('Sklearn Lasso',sk_lasso_cv,sk_lasso_split)
-    print_stats('Sklearn SGD',sk_sgd_cv,sk_sgd_split)
+    print('Model   \tCV Mean\tCV Std\tSplit Mean\tSplit Std')
+    print_stats('SkLinear',sk_linear_cv,sk_linear_split)
+    print_stats('SkRidge',sk_ridge_cv,sk_ridge_split)
+    print_stats('SkLasso',sk_lasso_cv,sk_lasso_split)
+    print_stats('SkSGD',sk_sgd_cv,sk_sgd_split)
     print_stats('Baseline',baseline_cv,baseline_split)
     print_stats('My Ridge',my_ridge_cv,my_ridge_split)
 
