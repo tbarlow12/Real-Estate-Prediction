@@ -29,7 +29,7 @@ for zip_code in zip_code_separated_data:
     sk_ridge.append(ridge_score)
     sk_lasso.append(lasso_score)
 
-    hypers = cv.find_hypers(s,features,labels,[[50,40,30,20,10,5],[1,.1,.01,.001,.0001,.00001]])
+    hypers = cv.find_hypers(stochasticGD.stochastic(),features,labels,[[50,40,30,20,10,5],[1,.1,.01,.001,.0001,.00001]])
 
 print(np.mean(sk_linear),np.std(sk_linear))
 print(np.mean(sk_ridge),np.std(sk_ridge))
