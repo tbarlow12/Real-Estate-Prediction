@@ -118,13 +118,17 @@ def get_feature_vector_separate(path,feature_names,label_name):
         for row in reader:
             vector = []
             label = None
+            has_all_features = True
             for key in row:
-                for feature in feature_names:
-                    if feature in key and row[key] != '':
+                for feature_name in feature_names:
+                    if feature_name in key and row[key] != '':
                         vector.append(float(row[key]))
+                    else:
+                        has_all_features = False
+                        
                 if key == label_name and row[key] != '':
                     label = float(row[key])
-            if label is not None:
+            if label is not None and has_all_features:
                 zip = row['Zip Code']
                 if zip in result: 
                     result[zip][0].append(vector)
