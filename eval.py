@@ -18,7 +18,6 @@ def print_stats(model_name,cv_list,split_list):
 
 def evaluate_separated():
 
-
     zip_code_separated_data = h.get_feature_vector_separate(
         'data_collection/Sample Data/final_feature_set.csv',
         ['MonthId','total','Crime Code'], #features
@@ -50,7 +49,6 @@ def evaluate_separated():
         
         zip_codes.append(zip_code)
 
-
         sk_linear_cv.append(cv.cross_validate(LinearRegression(),x,y))
         sk_linear_split.append(cv.eval_split(LinearRegression(),x,y,name='{}/sk_linear'.format(zip_code)))
 
@@ -79,6 +77,26 @@ def evaluate_separated():
     print_stats('My Ridge',my_ridge_cv,my_ridge_split)
 
 
+def get_all_features():
+    with open('all_features.txt') as f:
+        lines = f.readlines()
+        return [line.strip() for line in lines]
+
+def evaluate_model(model,features):
+    zip_code_separated_data = h.get_feature_vector_separate(
+        'data_collection/Sample Data/final_feature_set.csv',
+        features, #features
+        'Zip_MedianValuePerSqft_AllHomes') #label
+
+def find_best_features():
+    all_features = get_all_features()
+    
+    best_features = []
+    max_features = 10
+
+    
+
+
 def evaluate_together():
     zip_code_data = h.get_feature_vector_together(
         'data_collection/Sample Data/final_feature_set.csv',
@@ -104,7 +122,8 @@ def evaluate_together():
 
 def main():
     #evaluate_together()
-    evaluate_separated()
+    #evaluate_separated()
+    find_best_features()
 
 if __name__ == '__main__':
     main()
