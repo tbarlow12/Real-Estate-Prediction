@@ -47,7 +47,17 @@ def cross_validate(model,x,y):
 
 def find_hypers(model,x,y,hypers):
     best_score = float('inf')
-    if len(hypers) == 2:
+    best_params = []
+    if len(hypers) == 1:
+        
+        best_params = [hypers[0][0]]
+        for hyper1 in hypers[0]:
+            model.set_params(hyper1)
+            score = cross_validate(model,x,y)
+            if score < best_score:
+                best_score = score
+                best_params = [hyper1]
+    elif len(hypers) == 2:
         best_params = [hypers[0][0],hypers[1][0]]
         for hyper1 in hypers[0]:
             for hyper2 in hypers[1]:
@@ -56,4 +66,14 @@ def find_hypers(model,x,y,hypers):
                 if score < best_score:
                     best_score = score
                     best_params = [hyper1,hyper2]
-        return best_params
+    elif len(hypers) == 3:
+        best_params = [hypers[0][0],hypers[1][0],hypers[2][0]]
+        for hyper1 in hypers[0]:
+            for hyper2 in hypers[1]:
+                for hyper3 in hypers[2]:
+                    model.set_params(hyper1,hyper2,hyper3)
+                    score = cross_validate(model,x,y)
+                    if score < best_score:
+                        best_score = score
+                        best_params = [hyper1,hyper2,hyper3]
+    return best_params

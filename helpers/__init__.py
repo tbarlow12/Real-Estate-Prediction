@@ -113,6 +113,24 @@ def find_min(data):
 
 all_features = set()
 
+encoded_features_dict = {}
+
+categorical_encoding_size = 50
+
+def hash_value(item,size):
+    final_hash = [0] * size
+    for char in item:
+        final_hash[hash(char) % size] += 1
+    return final_hash
+
+def encode_feature(feature):
+    s = str(feature)
+    if s in encoded_features_dict:
+        return encoded_features_dict[s]
+    encoded_features_dict[s] = hash_value(feature,categorical_encoding_size)
+    return encoded_features_dict[s]
+    
+
 def get_feature_vector_separate(path,feature_names,label_name):
     with open(path) as f:
         reader = csv.DictReader(f)
@@ -145,7 +163,32 @@ def get_feature_vector_separate(path,feature_names,label_name):
             for feature in features:
                 f.write(feature + '\n')
         return result
-    
+
+def get_feature_vector_together(path,feature_names,label_name):
+    with open(path) as f:
+        reader = csv.DictReader(f)
+        x = []
+        y = []
+        for row in reader:
+            vector = []
+            zip = row['Zip Code']
+            vector = encode_feature(zip)
+            label = None
+            has_all_features = True
+            for key in row:
+                all_features.add(key)
+                for feature_name in feature_names:
+                    if key.startswith(feature_name):
+                        if row[key] != '':
+                            vector.append(float(row[key]))
+                        else:
+                            has_all_features = False 
+                if key == label_name and row[key] != '':
+                    label = float(row[key])
+            if label is not None and has_all_features:
+                x.append(vector)
+                y.append(label)
+        return [x,y]
 
             
 
