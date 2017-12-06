@@ -4,7 +4,7 @@ import helpers as h
 import cross_validation as cv
 from copy import deepcopy
 
-class stochastic:
+class stochastic_gd:
 
 
     def predict(self,x):
@@ -49,9 +49,15 @@ class stochastic:
 class baseline:
 
     def fit(self,x,y):
-        pass
+        self.mean = np.mean(y)
     def predict(self,x):
-        pass
+        if isinstance(x,list) and isinstance(x[0],list):
+            result = []
+            for item in x:
+                result.append(self.predict(item))
+            return result
+        else:
+            return self.mean
 
 class lasso:
     def fit(self,x,y):
@@ -65,8 +71,53 @@ class ridge:
     def predict(self,x):
         pass
 
-class linear:
+class stochastic:
+    def get_gradient(self,x,y):
+        y_estimate = x.dot(self.w).flatten()
+        error = (y.flatten() - y_estimate)
+        mse = (1.0/len(x))*np.sum(np.power(error, 2))
+        gradient = -(1.0/len(x)) * error.dot(x)
+        return gradient, mse
+
     def fit(self,x,y):
-        pass
+        self.w = np.array([0.0 for i in range(len(x[0]))])
+        x = np.array(x)
+        y = np.array(y)
+        alpha = 0.5
+        tolerance = 1e-5
+
+        # Perform Stochastic Gradient Descent
+        epochs = 1
+        decay = 0.95
+        batch_size = 10
+        iterations = 0
+        while True:
+            order = np.random.permutation(len(x))
+            train_x = x[order]
+            train_y = y[order]
+            b=0
+            while b < len(train_x):
+                tx = x[b : b+batch_size]
+                ty = x[b : b+batch_size]
+                gradient = self.get_gradient(tx, ty)[0]
+                error = self.get_gradient(x, y)[1]
+                self.w -= alpha * gradient
+                iterations += 1
+                b += batch_size
+            
+            # Keep track of our performance
+            if epochs%100==0:
+                new_error = get_gradient(w, train_x, train_y)[1]
+                print("Epoch: %d - Error: %.4f" %(epochs, new_error))
+            
+                # Stopping Condition
+                if abs(new_error - error) < tolerance:
+                    print("Converged.")
+                    break
+                
+            epochs += 1
+            alpha = alpha * (decay ** int(epochs/1000))
+
     def predict(self,x):
-        pass
+        x = np.array(x)
+        return x.dot(self.w).flatten()
