@@ -47,9 +47,11 @@ def plot_results(x_axis, actual, predictions, path):
     plt.savefig(path)
     plt.clf()
 
+include_graphs = False
+
 def evaluate_model(model,x,y,graph_path):
     results = model.predict(x)
-    if graph_path is not None:
+    if graph_path is not None and include_graphs:
         x_axis = [row[0] for row in x]
         plot_results(x_axis, y, results, graph_path)
     return rmse_metric(results,y)

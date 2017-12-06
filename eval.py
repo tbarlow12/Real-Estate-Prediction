@@ -6,7 +6,7 @@ from sklearn.linear_model import Ridge, Lasso, LinearRegression, SGDClassifier
 import numpy as np
 
 def print_stats(model_name,cv_list,split_list):
-    print('{}\t{}\t{}\t{}\t{}'.format(
+    print('{0}\t{1:.2f}\t{2:.2f}\t{3:.2f}\t{4:.2f}'.format(
         model_name,
         np.mean(cv_list),
         np.std(cv_list),
@@ -48,7 +48,6 @@ def evaluate_separated():
         
         zip_codes.append(zip_code)
 
-        print(zip_code)
 
         sk_linear_cv.append(cv.cross_validate(LinearRegression(),x,y))
         sk_linear_split.append(cv.eval_split(LinearRegression(),x,y,name='{}/sk_linear'.format(zip_code)))
