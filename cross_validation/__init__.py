@@ -28,12 +28,21 @@ def rmse_metric(predicted, actual):
     mean_error = sum_error / float(len(actual))
     return math.sqrt(mean_error)
 
-def evaluate_model(model,x,y):
+def plot_results(x_axis, actual, predictions, path):
+    plt.plot(x_axis, actual, 'r-', x_axis, predictions, 'b-')
+    plt.savefig(path)
+
+
+
+def evaluate_model(model,x,y,graph_path):
     results = model.predict(x)
+    if graph_path is not None:
+        x_axis = [row[0] for row in x]
+        plot_results(x_axis, y, results, graph_path)
     return rmse_metric(results,y)
     
 
-def cross_validate(model,x,y):
+def cross_validate(model,x,y,name=None):
     k = 2
     x_folds, y_folds = k_folds(x,y,k)
     scores = []
@@ -43,7 +52,12 @@ def cross_validate(model,x,y):
         x_test = x_folds[i]
         y_test = y_folds[i]
         model.fit(x_training,y_training)
-        scores, plot = evaluate_model(model,x_test,y_test)
+        if name is not None:
+            new_name = 'graphs/{}-fold{}.png'.format(name,i)
+        else:
+            new_name = None
+        score = evaluate_model(model,x_test,y_test,new_name)
+        print(score)
         scores.append(scores)
     return np.mean(scores)
 
