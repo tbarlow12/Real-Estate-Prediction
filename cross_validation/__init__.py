@@ -1,5 +1,6 @@
 import math
 import pdb
+import os
 import numpy as np
 import matplotlib 
 matplotlib.use('Agg')
@@ -32,9 +33,19 @@ def rmse_metric(predicted, actual):
     mean_error = sum_error / float(len(actual))
     return math.sqrt(mean_error)
 
+def get_dir(path):
+    last_index = path.rfind('/')
+    return path[0:last_index]
+
 def plot_results(x_axis, actual, predictions, path):
     plt.plot(x_axis, actual, 'ro', x_axis, predictions, 'bo')
+    if 'baseline' in path:
+        pdb.set_trace()
+    dir = get_dir(path)
+    if not os.path.exists(dir):
+        os.makedirs(dir)
     plt.savefig(path)
+    plt.clf()
 
 def evaluate_model(model,x,y,graph_path):
     results = model.predict(x)
@@ -71,11 +82,11 @@ def shuffle_xy(x,y):
 
 def eval_split(model,x,y,split=.75,name=None):
     training_size = math.floor(split * len(x))
-    new_x, new_y = shuffle_xy(x,y)
-    train_x = new_x[0:training_size]
-    train_y = new_y[0:training_size]
-    test_x = new_x[training_size:]
-    test_y = new_y[training_size:]
+    #new_x, new_y = shuffle_xy(x,y)
+    train_x = x[0:training_size]
+    train_y = y[0:training_size]
+    test_x = x[training_size:]
+    test_y = y[training_size:]
     model.fit(train_x,train_y)
     if name is not None:
         path = 'graphs/{}.png'.format(name)

@@ -5,6 +5,15 @@ import cross_validation as cv
 from sklearn.linear_model import Ridge, Lasso, LinearRegression, SGDClassifier
 import numpy as np
 
+def print_stats(model_name,cv_list,split_list):
+    print('{}\t{}\t{}\t{}\t{}'.format(
+        model_name,
+        np.mean(cv_list),
+        np.std(cv_list),
+        np.mean(split_list),
+        np.std(split_list)
+    ))
+
 def evaluate_separated():
 
 
@@ -14,50 +23,60 @@ def evaluate_separated():
         'Zip_MedianValuePerSqft_AllHomes') #label
 
     zip_codes = []
-    sk_linear = []
-    sk_ridge = [] 
-    sk_lasso = []
-    sk_sgd = []
 
-    baseline = []
-    my_ridge = []
+    sk_linear_cv = []
+    sk_linear_split = []
+    
+    sk_ridge_cv = []
+    sk_ridge_split = []
+
+    sk_lasso_cv = []
+    sk_lasso_split = []
+
+    sk_sgd_cv = []
+    sk_sgd_split = []
+
+    baseline_cv = []
+    baseline_split = []
+
+    my_ridge_cv = []
+    my_ridge_split = []
 
     for zip_code in zip_code_separated_data:
-        features = zip_code_separated_data[zip_code][0]
-        labels = zip_code_separated_data[zip_code][1]
+        x = zip_code_separated_data[zip_code][0]
+        y = zip_code_separated_data[zip_code][1]
         
         zip_codes.append(zip_code)
 
-        linear_score = cv.cross_validate(LinearRegression(),features,labels)
-        ridge_score = cv.cross_validate(Ridge(),features,labels)
-        lasso_score = cv.cross_validate(Lasso(),features,labels)
-        sgd_score = cv.cross_validate(SGDClassifier(),features,labels)
+        print(zip_code)
 
-        ridge_score = cv.eval_split(Ridge(),features,labels,name='ridge-{}'.format(zip_code))
-        pdb.set_trace()
+        sk_linear_cv.append(cv.cross_validate(LinearRegression(),x,y))
+        sk_linear_split.append(cv.eval_split(LinearRegression(),x,y,name='{}/sk_linear'.format(zip_code)))
 
-        sk_linear.append(linear_score)
-        sk_ridge.append(ridge_score)
-        sk_lasso.append(lasso_score)
-        sk_sgd.append(sgd_score)
+        sk_ridge_cv.append(cv.cross_validate(Ridge(),x,y))
+        sk_ridge_split.append(cv.eval_split(Ridge(),x,y,name='{}/sk_ridge'.format(zip_code)))
 
-        baseline_score = cv.cross_validate(baseline_classifier(),features,labels)
-        baseline.append(baseline_score)
+        sk_lasso_cv.append(cv.cross_validate(Lasso(),x,y))
+        sk_lasso_split.append(cv.eval_split(Lasso(),x,y,name='{}/sk_lasso'.format(zip_code)))
+
+        sk_sgd_cv.append(cv.cross_validate(SGDClassifier(),x,y))
+        sk_sgd_split.append(cv.eval_split(SGDClassifier(),x,y,name='{}/sk_sgd'.format(zip_code)))
+
+        baseline_cv.append(cv.cross_validate(baseline_classifier(),x,y))
+        baseline_split.append(cv.eval_split(baseline_classifier(),x,y,name='{}/baseline'.format(zip_code)))
+
+        my_ridge_cv.append(cv.cross_validate(ridge(),x,y))
+        my_ridge_split.append(cv.eval_split(ridge(),x,y,name='{}/my_ridge'.format(zip_code)))
         
 
-        ridge_hypers = cv.find_hypers(ridge(),features,labels,[[10,1,.1,.01,.001,.0001]])
-        ridge_model = ridge(ridge_hypers[0])
-        my_ridge_score = cv.cross_validate(ridge_model,features,labels)
-        my_ridge.append(my_ridge_score)
+    print('Model\tCV Mean\tCV Std\tSplit Mean\tSplit Std')
+    print_stats('Sklearn Linear',sk_linear_cv,sk_linear_split)
+    print_stats('Sklearn Ridge',sk_ridge_cv,sk_ridge_split)
+    print_stats('Sklearn Lasso',sk_lasso_cv,sk_lasso_split)
+    print_stats('Sklearn SGD',sk_sgd_cv,sk_sgd_split)
+    print_stats('Baseline',baseline_cv,baseline_split)
+    print_stats('My Ridge',my_ridge_cv,my_ridge_split)
 
-
-
-    print('Sklearn Linear: ', np.mean(sk_linear),np.std(sk_linear))
-    print('Sklearn Ridge: ', np.mean(sk_ridge),np.std(sk_ridge))
-    print('Sklearn Lasso: ', np.mean(sk_lasso),np.std(sk_lasso))
-    print('Sklearn SGD: ', np.mean(sk_sgd),np.std(sk_sgd))
-    print('Baseline: ', np.mean(baseline),np.std(baseline))
-    print('My Ridge: ', np.mean(my_ridge),np.std(my_ridge))
 
 def evaluate_together():
     zip_code_data = h.get_feature_vector_together(
