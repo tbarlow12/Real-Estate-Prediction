@@ -28,7 +28,7 @@ def evaluate_separated():
         
         zip_codes.append(zip_code)
 
-        linear_score = cv.cross_validate(LinearRegression(),features,labels,'Linear')
+        linear_score = cv.cross_validate(LinearRegression(),features,labels)
         ridge_score = cv.cross_validate(Ridge(),features,labels)
         lasso_score = cv.cross_validate(Lasso(),features,labels)
         sgd_score = cv.cross_validate(SGDClassifier(),features,labels)

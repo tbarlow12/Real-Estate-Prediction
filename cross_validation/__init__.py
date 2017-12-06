@@ -4,8 +4,6 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 
-matplotlib.use('Agg')
-
 def k_folds(x,y,k):
     count = float(len(x))
     fold_size = math.ceil(count / float(k))
@@ -57,8 +55,7 @@ def cross_validate(model,x,y,name=None):
         else:
             new_name = None
         score = evaluate_model(model,x_test,y_test,new_name)
-        print(score)
-        scores.append(scores)
+        scores.append(score)
     return np.mean(scores)
 
 def find_hypers(model,x,y,hypers):
