@@ -1,8 +1,11 @@
 import math
 import pdb
 import numpy as np
-import matplotlib
+import matplotlib 
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from random import shuffle
+
 
 def k_folds(x,y,k):
     count = float(len(x))
@@ -30,7 +33,7 @@ def rmse_metric(predicted, actual):
     return math.sqrt(mean_error)
 
 def plot_results(x_axis, actual, predictions, path):
-    plt.plot(x_axis, actual, 'r-', x_axis, predictions, 'b-')
+    plt.plot(x_axis, actual, 'ro', x_axis, predictions, 'bo')
     plt.savefig(path)
 
 def evaluate_model(model,x,y,graph_path):
@@ -57,6 +60,30 @@ def cross_validate(model,x,y,name=None):
         score = evaluate_model(model,x_test,y_test,new_name)
         scores.append(score)
     return np.mean(scores)
+
+def shuffle_xy(x,y):
+    result = []
+    for x_row,y_row in zip(x,y):
+        result.append([x_row,y_row])
+    shuffle(result)
+    return [pair[0] for pair in result], [pair[1] for pair in result]
+    
+
+def eval_split(model,x,y,split=.75,name=None):
+    training_size = math.floor(split * len(x))
+    new_x, new_y = shuffle_xy(x,y)
+    train_x = new_x[0:training_size]
+    train_y = new_y[0:training_size]
+    test_x = new_x[training_size:]
+    test_y = new_y[training_size:]
+    model.fit(train_x,train_y)
+    if name is not None:
+        path = 'graphs/{}.png'.format(name)
+    else:
+        path = None
+    score = evaluate_model(model,test_x,test_y,path)
+    return score
+
 
 def find_hypers(model,x,y,hypers):
     best_score = float('inf')

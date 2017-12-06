@@ -33,6 +33,9 @@ def evaluate_separated():
         lasso_score = cv.cross_validate(Lasso(),features,labels)
         sgd_score = cv.cross_validate(SGDClassifier(),features,labels)
 
+        ridge_score = cv.eval_split(Ridge(),features,labels,name='ridge-{}'.format(zip_code))
+        pdb.set_trace()
+
         sk_linear.append(linear_score)
         sk_ridge.append(ridge_score)
         sk_lasso.append(lasso_score)
