@@ -1,6 +1,7 @@
 import math
 import pdb
 import numpy as np
+import matplotlib.pyplot as plt
 
 def k_folds(x,y,k):
     count = float(len(x))
@@ -42,14 +43,15 @@ def cross_validate(model,x,y):
         x_test = x_folds[i]
         y_test = y_folds[i]
         model.fit(x_training,y_training)
-        scores.append(evaluate_model(model,x_test,y_test))
+        scores, plot = evaluate_model(model,x_test,y_test)
+        scores.append(scores)
     return np.mean(scores)
 
 def find_hypers(model,x,y,hypers):
     best_score = float('inf')
     best_params = []
     if len(hypers) == 1:
-        
+
         best_params = [hypers[0][0]]
         for hyper1 in hypers[0]:
             model.set_params(hyper1)
