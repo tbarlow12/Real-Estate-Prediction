@@ -10,7 +10,7 @@ from random import shuffle
 
 def k_folds(x,y,k):
     count = float(len(x))
-    fold_size = math.ceil(count / float(k))
+    fold_size = math.floor(count / float(k))
     x_folds = []
     y_folds = []
     start_index = 0
@@ -61,7 +61,10 @@ def cross_validate(model,x,y,name=None,include_graphs=False):
     for i in range(0,k):
         x_training = (x_folds[:i] + x_folds[(i + 1):])[0]
         y_training = (y_folds[:i] + y_folds[(i + 1):])[0]
-        x_test = x_folds[i]
+        try:
+            x_test = x_folds[i]
+        except IndexError:
+            pdb.set_trace()
         y_test = y_folds[i]
         model.fit(x_training,y_training)
         if name is not None:
