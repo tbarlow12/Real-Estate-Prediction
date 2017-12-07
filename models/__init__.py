@@ -66,33 +66,23 @@ class lasso:
         pass
 
 class ridge:
-    def set_params(self,lam=.1):
-        self.lam = lam
-    def fit(self,x,y):
-        x = np.array(x)
-        y = np.array(y)
-        ones = np.ones(len(x))
-        x = np.column_stack((ones,x))
 
-        xt = np.transpose(x)
-        lam_ident = self.lam * np.identity(len(xt))
-        inv = np.linalg.inv(np.dot(xt,x) + lam_ident)
-        self.w = np.dot(np.dot(inv,xt),y)
-        self.bias = self.w[0]
-        self.w = self.w[1:]
-        return self.w, lambda x: dot(self.w,x)
+    def fit(self, X, y):
+        X = np.array(X)
+        y = np.array(y)
+        C = X.T.dot(X) + self.lmbda*np.eye(X.shape[1])
+        self.w = np.linalg.inv(C).dot(X.T.dot(y))
+
+    def set_params(self, lmbda=0.1):
+        self.lmbda = lmbda
 
     def predict(self,x):
-        if isinstance(x,list) and isinstance(x[0],list):
-            result = []
-            for item in x:
-                result.append(self.predict(item))
-            return result
-        else:
-            return self.bias + np.dot(self.w,x)
+        x = np.array(x)
+        return x.dot(self.w)
     
-    def __init__(self,lam=.1):
-        self.lam = lam
+    def __init__(self, lmbda=0.1):
+        self.lmbda = lmbda
+
 
 class stochastic:
     def get_gradient(self,x,y):
