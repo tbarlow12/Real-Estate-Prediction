@@ -1,6 +1,6 @@
 import helpers as h 
 import pdb
-from models import baseline_classifier, ridge 
+from models import baseline_classifier, ridge, lasso
 import cross_validation as cv
 from sklearn.linear_model import Ridge, Lasso, LinearRegression, SGDClassifier
 import numpy as np
@@ -150,6 +150,7 @@ def find_best_features(model):
                 if score is not None and score < best_feature_score:
                     best_feature = feature
                     best_feature_score = score
+                    print(best_feature, best_feature_score)
         if best_feature_score < best_overall_score:
             has_improved = True
             best_features.append(best_feature)
@@ -185,18 +186,22 @@ def evaluate_together():
 
 def main():
     #evaluate_together()
-    evaluate_separated()
+    #evaluate_separated()
     '''
     Results for SKRidge
     SKRidge ['MonthId', 'Zip_MedianRentalPrice_DuplexTriplex', 'Zip_MedianRentalPricePerSqft_CondoCoop', 'Zip_Listings_PriceCut_SeasAdj_AllHomes', 'Zip_ZriPerSqft_AllHomes'] 5.51085665045
     '''
-    #ridge_features, ridge_score = find_best_features(Ridge())
-    #print('SKRidge',ridge_features,ridge_score)
-    
 
-    #linear_features, linear_score = find_best_features(LinearRegression())
-    #print('SKLinear',linear_features,linear_score)
+    ridge_features, ridge_score = find_best_features(ridge())
+    print('My Ridge',ridge_features,ridge_score)
+
+    lasso_features, lasso_score = find_best_features(lasso())
+    print('My LSso', lasso_features,lasso_score)
+    
     '''
+    linear_features, linear_score = find_best_features(LinearRegression())
+    print('SKLinear',linear_features,linear_score)
+    
     lasso_features, lasso_score = find_best_features(Lasso())
     print('SKLasso',lasso_features,lasso_score)
 

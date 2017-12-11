@@ -6,7 +6,6 @@ from copy import deepcopy
 
 class stochastic_gd:
 
-
     def predict(self,x):
         if isinstance(x,list) and isinstance(x[0],list):
             result = []
@@ -67,11 +66,11 @@ class lasso:
 
 class ridge:
 
-    def fit(self, X, y):
-        X = np.array(X)
+    def fit(self, x, y):
+        x = np.array(x)
         y = np.array(y)
-        C = X.T.dot(X) + self.lmbda*np.eye(X.shape[1])
-        self.w = np.linalg.inv(C).dot(X.T.dot(y))
+        C = x.T.dot(x) + self.lmbda*np.eye(x.shape[1])
+        self.w = np.linalg.inv(C).dot(x.T.dot(y))
 
     def set_params(self, lmbda=0.1):
         self.lmbda = lmbda
@@ -83,6 +82,24 @@ class ridge:
     def __init__(self, lmbda=0.1):
         self.lmbda = lmbda
 
+class lasso:
+    def fit(self, x, y):
+        x = np.array(x)
+        ones = np.ones(len(x))
+        X = np.column_stack((ones,x))
+        y = np.array(y)
+        
+        Xt = np.transpose(x)
+        lambda_identity = lam*np.identity(len(Xt))
+        inv = np.linalg.inv(Xt+lambda_identity)
+        w = np.dot(np.dot(inv, Xt), y)
+
+    def predict(self,x):
+        x = np.array(x)
+        return x.dot(self.w)
+
+    def __init__(self, lmbda=0.1):
+        self.lmbda = lmbda
 
 class stochastic:
     def get_gradient(self,x,y):
