@@ -11,7 +11,7 @@ Zip_Listings_PriceCut_SeasAdj_SingleFamilyResidence 77.4334888671
 Zip_MedianListingPricePerSqft_Sfr 58.3314398638
 Zip_MedianListingPrice_5BedroomOrMore 21.3116682906
 Zip_MedianRentalPrice_AllHomes 18.3151367302
-My Linear ['MonthId', 'Zip_MedianListingPricePerSqft_4Bedroom', 'Zip_MedianListi                                                                                                             ngPrice_3Bedroom'] 14.5526363015
+My Linear ['MonthId', 'Zip_MedianListingPricePerSqft_4Bedroom', 'Zip_MedianListingPrice_3Bedroom'] 14.5526363015
 Zip_Listings_PriceCut_SeasAdj_AllHomes 71.5360840491
 Zip_MedianListingPricePerSqft_2Bedroom 21.3225442983
 Zip_MedianListingPricePerSqft_3Bedroom 17.4804692454

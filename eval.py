@@ -1,8 +1,7 @@
 import helpers as h 
 import pdb
-from models import baseline_classifier, ridge, lasso, linear
+from models import baseline_classifier, ridge, linear
 import cross_validation as cv
-from sklearn.linear_model import Ridge, Lasso, LinearRegression, SGDClassifier
 import numpy as np
 from copy import deepcopy
 import operator
@@ -27,29 +26,6 @@ def print_stats(model_name,cv_list,test_scores,train_scores,zip_codes):
     ))
 
 
-def evaluate_together():
-    zip_code_data = h.get_feature_vector_together(
-        'data_collection/Sample Data/final_feature_set.csv',
-        ['MonthId','total'], #features
-        'Zip_MedianValuePerSqft_AllHomes') #label
-    
-    features = zip_code_data[0]
-    labels = zip_code_data[1]
-
-    linear_score = cv.cross_validate(LinearRegression(),features,labels)
-    ridge_score = cv.cross_validate(Ridge(),features,labels)
-    lasso_score = cv.cross_validate(Lasso(),features,labels)
-    #sgd_score = cv.cross_validate(SGDClassifier(),features,labels)
-
-    baseline_score = cv.cross_validate(baseline_classifier(),features,labels)
-
-    print('Sklearn Linear: ', linear_score)
-    print('Sklearn Ridge: ', ridge_score)
-    print('Sklearn Lasso: ', lasso_score)
-    #print('Sklearn SGD: ', sgd_score)
-    print('Baseline: ', baseline_score)
-
-
 def evaluate_separated(model,features,name):
 
     zip_code_separated_data = h.get_feature_vector_separate(
@@ -66,8 +42,6 @@ def evaluate_separated(model,features,name):
     for zip_code in zip_code_separated_data:
         x = zip_code_separated_data[zip_code][0]
         y = zip_code_separated_data[zip_code][1]
-        
-
         cv_scores.append(cv.cross_validate(model,x,y))
         test_score, train_score = cv.eval_split(model,x,y,name='{}/{}'.format(zip_code,name),include_graphs=True)
         test_scores.append(test_score) 
@@ -162,62 +136,31 @@ def evaluate_together():
 
     linear_score = cv.cross_validate(LinearRegression(),features,labels)
     ridge_score = cv.cross_validate(Ridge(),features,labels)
-    lasso_score = cv.cross_validate(Lasso(),features,labels)
-    #sgd_score = cv.cross_validate(SGDClassifier(),features,labels)
 
     baseline_score = cv.cross_validate(baseline_classifier(),features,labels)
 
-    print('Sklearn Linear: ', linear_score)
-    print('Sklearn Ridge: ', ridge_score)
-    print('Sklearn Lasso: ', lasso_score)
-    #print('Sklearn SGD: ', sgd_score)
-    print('Baseline: ', baseline_score)
-
-
-
-
 def main():
     '''
-    Results for SKRidge
-    SKRidge ['MonthId', 'Zip_MedianRentalPrice_DuplexTriplex', 'Zip_MedianRentalPricePerSqft_CondoCoop', 'Zip_Listings_PriceCut_SeasAdj_AllHomes', 'Zip_ZriPerSqft_AllHomes'] 5.51085665045
-
-    Results for My Ridge
+    Results for Ridge
     My Ridge ['MonthId', 'Zip_MedianListingPricePerSqft_4Bedroom', 'Zip_MedianListingPrice_3Bedroom', 'Zip_PriceToRentRatio_AllHomes', 'Zip_ZriPerSqft_AllHomes'] 13.1522008048
     
-    Results for My Linear
+    Results for Linear
     My Linear ['MonthId', 'Zip_MedianListingPricePerSqft_4Bedroom', 'Zip_MedianListingPrice_3Bedroom'] 14.5526363015
     
+    TO FIND BEST FEATURES
+
     linear_features, linear_score = find_best_features(linear())
-    print('My Linear', linear_features, linear_score)
+    print('Linear', linear_features, linear_score)
     
     ridge_features, ridge_score = find_best_features(ridge())
-    print('My Ridge',ridge_features,ridge_score)
+    print('Ridge',ridge_features,ridge_score)
     '''
     ridge_features = ['MonthId', 'Zip_MedianListingPricePerSqft_4Bedroom', 'Zip_MedianListingPrice_3Bedroom', 'Zip_PriceToRentRatio_AllHomes', 'Zip_ZriPerSqft_AllHomes']
     linear_features = ['MonthId', 'Zip_MedianListingPricePerSqft_4Bedroom', 'Zip_MedianListingPrice_3Bedroom']
     
     evaluate_separated(ridge(),ridge_features,'Ridge')
     evaluate_separated(linear(),linear_features,'Linear')
-
-
-    '''
-    lasso_features, lasso_score = find_best_features(lasso())
-    print('My Lasso', lasso_features,lasso_score)
-    '''
-
-    #hyper = find_hypers_multiple(ridge(),['MonthId', 'Zip_MedianRentalPricePerSqft_Studio'],[[10,1,.1,.01,.001,.0001]])
-    #print(hyper)
-    
-    '''
-    sklinear_features, sklinear_score = find_best_features(LinearRegression())
-    print('SKLinear',sklinear_features,sklinear_score)
-    
-    sklasso_features, sklasso_score = find_best_features(Lasso())
-    print('SKLasso',sklasso_features,sklasso_score)
-
-    sksgd_features, sksgd_score = find_best_features(SGDClassifier())
-    print('SGDClassifier',sksgd_features,sksgd_score)
-    '''
+    evaluate_separated(baseline_classifier(),linear_features,'Baseline')
 
 if __name__ == '__main__':
     main()
