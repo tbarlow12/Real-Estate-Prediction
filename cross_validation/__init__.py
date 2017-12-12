@@ -39,6 +39,12 @@ def get_dir(path):
 
 def plot_results(x_axis, actual, predictions, path):
     plt.plot(x_axis, actual, 'ro', x_axis, predictions, 'bo')
+    plt.legend(['Actual','Predicted'])
+    zip_code = path[7:12]
+    model_name = path[13:-4]
+    plt.suptitle('Zip Code {} - {} Regression'.format(zip_code,model_name),fontsize=18)
+    plt.xlabel('Month Id', fontsize=16)
+    plt.ylabel('Median Value Per Sqft', fontsize=14)
     if 'baseline' in path:
         pdb.set_trace()
     dir = get_dir(path)
@@ -88,15 +94,15 @@ def eval_split(model,x,y,split=.75,name=None,include_graphs=False):
         path = 'graphs/{}.png'.format(name)
     else:
         path = None
-    score = evaluate_model(model,test_x,test_y,path,include_graphs)
-    return score
+    test_score = evaluate_model(model,test_x,test_y,path,include_graphs)
+    train_score = evaluate_model(model,train_x,train_y,None,False)
+    return test_score, train_score
 
 
 def find_hypers(model,x,y,hypers):
     best_score = float('inf')
     best_params = []
     if len(hypers) == 1:
-
         best_params = [hypers[0][0]]
         for hyper1 in hypers[0]:
             model.set_params(hyper1)

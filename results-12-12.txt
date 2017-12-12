@@ -1,0 +1,79 @@
+Zip_Listings_PriceCut_SeasAdj_AllHomes 71.5556974985
+Zip_MedianListingPricePerSqft_2Bedroom 21.3237137022
+Zip_MedianListingPricePerSqft_3Bedroom 17.4809153646
+Zip_MedianListingPricePerSqft_4Bedroom 16.9629650938
+['MonthId', 'Zip_MedianListingPricePerSqft_4Bedroom']
+Zip_Listings_PriceCut_SeasAdj_AllHomes 39.6465862438
+Zip_MedianListingPrice_3Bedroom 14.5526363015
+['MonthId', 'Zip_MedianListingPricePerSqft_4Bedroom', 'Zip_MedianListingPrice_3B                                                                                                             edroom']
+Zip_Listings_PriceCut_SeasAdj_AllHomes 23261.7607667
+Zip_Listings_PriceCut_SeasAdj_SingleFamilyResidence 77.4334888671
+Zip_MedianListingPricePerSqft_Sfr 58.3314398638
+Zip_MedianListingPrice_5BedroomOrMore 21.3116682906
+Zip_MedianRentalPrice_AllHomes 18.3151367302
+My Linear ['MonthId', 'Zip_MedianListingPricePerSqft_4Bedroom', 'Zip_MedianListi                                                                                                             ngPrice_3Bedroom'] 14.5526363015
+Zip_Listings_PriceCut_SeasAdj_AllHomes 71.5360840491
+Zip_MedianListingPricePerSqft_2Bedroom 21.3225442983
+Zip_MedianListingPricePerSqft_3Bedroom 17.4804692454
+Zip_MedianListingPricePerSqft_4Bedroom 16.9574002476
+['MonthId', 'Zip_MedianListingPricePerSqft_4Bedroom']
+Zip_Listings_PriceCut_SeasAdj_AllHomes 25.3709088845
+Zip_MedianListingPricePerSqft_3Bedroom 20.4857146568
+Zip_MedianListingPrice_3Bedroom 14.4954614328
+['MonthId', 'Zip_MedianListingPricePerSqft_4Bedroom', 'Zip_MedianListingPrice_3B                                                                                                             edroom']
+Zip_Listings_PriceCut_SeasAdj_AllHomes 24.8118852147
+Zip_MedianListingPricePerSqft_3Bedroom 20.2830927274
+Zip_MedianListingPrice_5BedroomOrMore 17.7072942883
+Zip_MedianPctOfPriceReduction_AllHomes 17.2134069138
+Zip_MedianPctOfPriceReduction_SingleFamilyResidence 17.1284926785
+Zip_MedianRentalPricePerSqft_AllHomes 15.9742587393
+Zip_PriceToRentRatio_AllHomes 13.2394877877
+['MonthId', 'Zip_MedianListingPricePerSqft_4Bedroom', 'Zip_MedianListingPrice_3B                                                                                                             edroom', 'Zip_PriceToRentRatio_AllHomes']
+Zip_Listings_PriceCut_SeasAdj_AllHomes 23.0747811689
+Zip_MedianListingPricePerSqft_3Bedroom 20.1844357234
+Zip_MedianListingPricePerSqft_AllHomes 19.1906201652
+Zip_MedianPctOfPriceReduction_AllHomes 15.2440066917
+Zip_MedianRentalPricePerSqft_AllHomes 13.8384468864
+Zip_ZriPerSqft_AllHomes 13.1522008048
+['MonthId', 'Zip_MedianListingPricePerSqft_4Bedroom', 'Zip_MedianListingPrice_3Bedroom', 'Zip_PriceToRentRatio_AllHomes', 'Zip_ZriPerSqft_AllHomes']
+Zip_Listings_PriceCut_SeasAdj_AllHomes 23.0274782907
+Zip_MedianListingPricePerSqft_3Bedroom 20.1729016364
+Zip_MedianListingPricePerSqft_AllHomes 19.1443241035
+Zip_MedianPctOfPriceReduction_AllHomes 15.2014329261
+Zip_MedianRentalPricePerSqft_AllHomes 13.7438087142
+My Ridge ['MonthId', 'Zip_MedianListingPricePerSqft_4Bedroom', 'Zip_MedianListingPrice_3Bedroom', 'Zip_PriceToRentRatio_AllHomes', 'Zip_ZriPerSqft_AllHomes'] 13.1522008048
+Model           CV Mean CV Std  Split Mean      Split Std
+['91744', 5.281785085205921, 44]
+['90019', 13.5715103062119, 40]
+['91355', 2.7953967064388343, 21]
+['93536', 1.6756858633010845, 47]
+['91766', 3.7510550942489127, 47]
+My Ridge        21.067  31.787  5.719   3.300
+Model           CV Mean CV Std  Split Mean      Split Std
+['91744', 5.510792531769795, 44]
+['90019', 18.429038752882562, 40]
+['91355', 5.523814736750529, 21]
+['93536', 1.269489621537091, 47]
+['91766', 4.843619833585616, 47]
+My Linear       299493.871      805387.061      8.518   6.178
+
+
+
+After running again with training error and graphs included:
+Best Zip Codes
+['91744', 5.281785085205921, 44]
+['90019', 13.5715103062119, 40]
+['91355', 2.7953967064388343, 21]
+['93536', 1.6756858633010845, 47]
+['91766', 3.7510550942489127, 47]
+Model           CV Mean CV Std  Test Mean       Test Std        Train Mean      Train Std
+Ridge           21.067  31.787  5.719   3.300   4.932   2.980
+Best Zip Codes
+['91744', 5.510792531769795, 44]
+['90019', 18.429038752882562, 40]
+['91355', 5.523814736750529, 21]
+['93536', 1.269489621537091, 47]
+['91766', 4.843619833585616, 47]
+Model           CV Mean CV Std  Test Mean       Test Std        Train Mean      Train Std
+Linear          299493.871      805387.061      8.518   6.178   8.241   6.089
+

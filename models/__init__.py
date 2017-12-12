@@ -58,11 +58,6 @@ class baseline_classifier:
         else:
             return self.mean
 
-class lasso:
-    def fit(self,x,y):
-        pass
-    def predict(self,x):
-        pass
 
 class ridge:
 
@@ -90,7 +85,7 @@ class lasso:
         y = np.array(y)
         
         Xt = np.transpose(x)
-        lambda_identity = lam*np.identity(len(Xt))
+        lambda_identity = self.lmbda*np.identity(len(Xt))
         inv = np.linalg.inv(Xt+lambda_identity)
         w = np.dot(np.dot(inv, Xt), y)
 
@@ -101,6 +96,18 @@ class lasso:
     def __init__(self, lmbda=0.1):
         self.lmbda = lmbda
 
+class linear:
+    def predict(self,x):
+        x = np.array(x)
+        return x.dot(self.w)
+
+    def fit(self,x,y):
+        x = np.array(x)
+        y = np.array(y)
+        try:
+            self.w = np.linalg.solve(x.T.dot(x), x.T.dot(y))
+        except np.linalg.linalg.LinAlgError:
+            self.w = np.ones(len(x[0]))
 class stochastic:
     def get_gradient(self,x,y):
         y_estimate = x.dot(self.w).flatten()
